@@ -10,6 +10,19 @@ const localAdminEmail = process.env.ADMIN_EMAIL?.trim();
 const localAdminPassword = process.env.ADMIN_PASSWORD;
 export const localAdminCookieName = "admin-session";
 
+type SessionBase = {
+  supabase: ReturnType<typeof createClient> | null;
+  user: { id: string; email: string | undefined } | null;
+  unavailable: boolean;
+  localAuth: boolean;
+};
+
+type AdminSession = SessionBase & { profile: AdminProfile };
+type UnavailableSession = SessionBase & { profile: null; unavailable: true };
+type NoUserSession = SessionBase & { profile: null; unavailable: false };
+
+type AdminSessionResult = AdminSession | UnavailableSession | NoUserSession;
+
 function createServiceRoleClient() {
   const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
@@ -36,7 +49,7 @@ export function createLocalAdminCookieValue() {
   return `${localAdminEmail}.${signature}`;
 }
 
-async function getLocalAdminSession() {
+async function getLocalAdminSession(): Promise<AdminSession | null> {
   const expectedValue = createLocalAdminCookieValue();
 
   if (!expectedValue) {
@@ -69,13 +82,13 @@ async function getLocalAdminSession() {
       title: "Administrator",
       bio: "Primary admin account for portfolio management.",
       is_super_admin: true,
-    } satisfies AdminProfile,
+    } as AdminProfile,
     unavailable: false as const,
     localAuth: true as const,
   };
 }
 
-export async function getAdminSession() {
+export async function getAdminSession(): Promise<AdminSessionResult> {
   const localSession = await getLocalAdminSession();
 
   if (localSession) {
@@ -109,7 +122,7 @@ export async function getAdminSession() {
   return { supabase, user, profile: profile ?? null, unavailable: false as const, localAuth: false as const };
 }
 
-export async function requireAdmin() {
+export async function requireAdmin(): Promise<AdminSessionResult> {
   const session = await getAdminSession();
 
   if (session.unavailable) {
