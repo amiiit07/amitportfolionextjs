@@ -1,0 +1,20 @@
+<svg width="720" height="720" viewBox="0 0 720 720" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="110" y1="90" x2="620" y2="640" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#163458"/>
+      <stop offset="0.55" stop-color="#0A1D36"/>
+      <stop offset="1" stop-color="#050D18"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="150" y1="160" x2="580" y2="590" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#47D7FF"/>
+      <stop offset="1" stop-color="#1E7DD7"/>
+    </linearGradient>
+  </defs>
+  <circle cx="360" cy="360" r="350" fill="url(#bg)"/>
+  <circle cx="360" cy="360" r="328" stroke="url(#glow)" stroke-width="4"/>
+  <circle cx="360" cy="270" r="118" fill="#10253D"/>
+  <path d="M229 530C253 446 317 404 360 404C403 404 467 446 491 530V597H229V530Z" fill="#10253D"/>
+  <circle cx="360" cy="360" r="236" stroke="rgba(71,215,255,0.18)" stroke-width="2"/>
+  <path d="M232 560C267 477 320 438 360 438C400 438 453 477 488 560" stroke="#2AAEF1" stroke-opacity="0.55" stroke-width="8" stroke-linecap="round"/>
+  <text x="360" y="640" text-anchor="middle" fill="#9EDCFF" font-family="Arial, sans-serif" font-size="72" font-weight="700" letter-spacing="10">AMIT</text>
+</svg>
