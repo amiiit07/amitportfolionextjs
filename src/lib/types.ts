@@ -40,7 +40,7 @@ export type ActivityLog = {
 
 export type AdminProfile = {
   id: string;
-  email: string;
+  email: string | null;
   full_name: string | null;
   title: string | null;
   bio: string | null;
