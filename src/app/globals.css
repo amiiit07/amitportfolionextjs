@@ -383,6 +383,10 @@ select {
   padding: 0.9rem 1rem;
   text-align: center;
 }
+.soft-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(46, 203, 255, 0.25), transparent);
+}
 
 .project-preview {
   position: relative;

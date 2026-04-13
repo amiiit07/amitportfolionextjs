@@ -1,10 +1,26 @@
+import type { Metadata } from "next";
 import { submitContactAction } from "@/app/actions/contact";
 import { ContactForm } from "@/components/contact-form";
 import { Reveal } from "@/components/reveal";
 import { SectionHeading } from "@/components/section-heading";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
+import { siteDescription, siteName } from "@/lib/site";
 import { getSiteSettings } from "@/lib/queries";
+
+export const metadata: Metadata = {
+  title: "Contact",
+  description:
+    "Get in touch about your portfolio, dashboard, or full-stack web app and I’ll respond with a practical build approach.",
+  alternates: {
+    canonical: "/contact",
+  },
+  openGraph: {
+    title: `Contact | ${siteName}`,
+    description: siteDescription,
+    url: "/contact",
+  },
+};
 
 type ContactPageProps = {
   searchParams: Promise<Record<string, string | string[] | undefined>>;

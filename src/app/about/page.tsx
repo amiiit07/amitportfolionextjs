@@ -1,9 +1,25 @@
+import type { Metadata } from "next";
 import { Reveal } from "@/components/reveal";
 import { SectionHeading } from "@/components/section-heading";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { experienceTimeline, skills } from "@/lib/site-data";
+import { siteDescription, siteName } from "@/lib/site";
 import { getSiteSettings } from "@/lib/queries";
+
+export const metadata: Metadata = {
+  title: "About",
+  description:
+    "Learn more about Amit Kumar, a full-stack developer focused on polished portfolio sites, dashboards, and scalable web applications.",
+  alternates: {
+    canonical: "/about",
+  },
+  openGraph: {
+    title: `About | ${siteName}`,
+    description: siteDescription,
+    url: "/about",
+  },
+};
 
 export default async function AboutPage() {
   const settings = await getSiteSettings();

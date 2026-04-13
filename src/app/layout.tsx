@@ -1,10 +1,29 @@
 import type { Metadata } from "next";
 import { CyberBackground } from "@/components/cyber-background";
+import { getSiteUrl, siteDescription, siteName } from "@/lib/site";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Amit | Futuristic Developer Portfolio",
-  description: "Cyberpunk-inspired full-stack developer portfolio built with Next.js, Tailwind CSS, Framer Motion, Supabase, and Vercel.",
+  metadataBase: getSiteUrl(),
+  title: {
+    default: siteName,
+    template: `%s | ${siteName}`,
+  },
+  description: siteDescription,
+  openGraph: {
+    type: "website",
+    title: siteName,
+    description: siteDescription,
+    url: "/",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteName,
+    description: siteDescription,
+  },
+  alternates: {
+    canonical: "/",
+  },
 };
 
 export default function RootLayout({

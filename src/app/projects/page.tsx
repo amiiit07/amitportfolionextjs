@@ -1,9 +1,25 @@
+import type { Metadata } from "next";
 import { ProjectCard } from "@/components/project-card";
 import { Reveal } from "@/components/reveal";
 import { SectionHeading } from "@/components/section-heading";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
+import { siteDescription, siteName } from "@/lib/site";
 import { getProjects } from "@/lib/queries";
+
+export const metadata: Metadata = {
+  title: "Projects",
+  description:
+    "A curated set of full-stack projects built with modern frontend patterns, admin workflows, and production-ready backend integration.",
+  alternates: {
+    canonical: "/projects",
+  },
+  openGraph: {
+    title: `Projects | ${siteName}`,
+    description: siteDescription,
+    url: "/projects",
+  },
+};
 
 export default async function ProjectsPage() {
   const projects = await getProjects();

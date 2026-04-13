@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { submitContactAction } from "@/app/actions/contact";
 import { ContactForm } from "@/components/contact-form";
@@ -12,7 +13,21 @@ import { SocialLinks } from "@/components/social-links";
 import { StatsGrid } from "@/components/stats-grid";
 import { TechStackGrid } from "@/components/tech-stack-grid";
 import { aboutHighlights, experienceTimeline } from "@/lib/site-data";
+import { siteDescription, siteName } from "@/lib/site";
 import { getProjects, getSiteSettings } from "@/lib/queries";
+
+export const metadata: Metadata = {
+  title: "Full Stack Developer",
+  description: siteDescription,
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: siteName,
+    description: siteDescription,
+    url: "/",
+  },
+};
 
 type HomePageProps = {
   searchParams: Promise<Record<string, string | string[] | undefined>>;
