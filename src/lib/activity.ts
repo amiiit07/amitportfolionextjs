@@ -19,12 +19,14 @@ export async function logAdminActivity({
     return;
   }
 
-  await session.supabase.from("activity_logs").insert({
-    action,
-    entity_type: entityType,
-    entity_id: entityId,
-    details,
-    admin_email: session.user.email ?? null,
-  });
+  await session.supabase.from("activity_logs").insert([
+    {
+      action,
+      entity_type: entityType,
+      entity_id: entityId,
+      details,
+      admin_email: session.user.email ?? null,
+    },
+  ] as any);
 }
 

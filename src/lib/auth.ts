@@ -11,8 +11,8 @@ const localAdminPassword = process.env.ADMIN_PASSWORD;
 export const localAdminCookieName = "admin-session";
 
 type SessionBase = {
-  supabase: ReturnType<typeof createClient> | null;
-  user: { id: string; email: string | undefined } | null;
+  supabase: any;
+  user: { id: string; email?: string } | null;
   unavailable: boolean;
   localAuth: boolean;
 };
