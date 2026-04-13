@@ -99,10 +99,10 @@ async function main() {
   });
 
   if (profileError) {
-    throw profileError;
+    console.warn(`Admin profile sync skipped: ${profileError.message}`);
+  } else {
+    console.log("Admin profile is ready.");
   }
-
-  console.log("Admin profile is ready.");
 }
 
 main().catch((error) => {

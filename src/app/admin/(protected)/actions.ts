@@ -2,8 +2,10 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { cookies } from "next/headers";
 import { logAdminActivity } from "@/lib/activity";
 import { requireAdmin } from "@/lib/auth";
+import { localAdminCookieName } from "@/lib/auth";
 import { slugify, toArray } from "@/lib/utils";
 import { contactAdminSchema, projectSchema, settingsSchema } from "@/lib/validators";
 import type { createSupabaseServerClient } from "@/lib/supabase/server";
@@ -22,6 +24,12 @@ function getProtectedSupabase<T extends { supabase: SupabaseClient | null; unava
 
 export async function signOutAction() {
   const session = await requireAdmin();
+
+  if (session.localAuth) {
+    const cookieStore = await cookies();
+    cookieStore.delete(localAdminCookieName);
+    redirect("/admin/login");
+  }
 
   const supabase = session.unavailable ? null : getProtectedSupabase(session);
 

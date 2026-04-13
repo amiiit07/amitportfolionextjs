@@ -35,8 +35,8 @@ export default async function AdminLoginPage({ searchParams }: LoginPageProps) {
                 Portfolio dashboard login
               </h1>
               <p className="mt-5 max-w-xl text-base leading-8 text-muted">
-                Sign in with your Supabase Auth admin account to manage projects, messages,
-                settings, and activity logs.
+                Sign in with the backend admin credentials from .env, or use a Supabase Auth admin
+                account, to manage projects, messages, settings, and activity logs.
               </p>
             </div>
 

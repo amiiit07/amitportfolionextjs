@@ -8,7 +8,7 @@ import type { AdminProfile } from "@/lib/types";
 
 const localAdminEmail = process.env.ADMIN_EMAIL?.trim();
 const localAdminPassword = process.env.ADMIN_PASSWORD;
-const localAdminCookieName = "admin-session";
+export const localAdminCookieName = "admin-session";
 
 function createServiceRoleClient() {
   const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
@@ -25,7 +25,7 @@ function createServiceRoleClient() {
   });
 }
 
-function createLocalAdminCookieValue() {
+export function createLocalAdminCookieValue() {
   if (!localAdminEmail || !localAdminPassword) {
     return null;
   }
