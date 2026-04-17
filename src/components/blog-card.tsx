@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Clock, Tag } from "lucide-react";
 import type { Blog } from "@/lib/types";
@@ -12,9 +13,12 @@ export function BlogCard({ blog }: BlogCardProps) {
       <article className="surface h-full overflow-hidden rounded-[1.8rem] transition-transform duration-300 hover:-translate-y-1">
         {blog.cover_image && (
           <div className="aspect-video w-full overflow-hidden">
-            <img
+            <Image
               src={blog.cover_image}
               alt={blog.title}
+              width={960}
+              height={540}
+              unoptimized
               className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
             />
           </div>

@@ -5,29 +5,27 @@ import { techStackItems } from "@/lib/site-data";
 
 export function TechStackGrid() {
   return (
-    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    <div className="flex flex-wrap gap-3 md:gap-4">
       {techStackItems.map((item, index) => {
         const Icon = item.icon;
 
         return (
           <motion.article
             key={item.name}
-            className={`surface rounded-[1.6rem] p-5 ${item.glow}`}
-            initial={{ opacity: 0, y: 20 }}
+            className={`group subtle-tag inline-flex items-center gap-2.5 rounded-full px-4 py-2.5 ${item.glow}`}
+            initial={{ opacity: 0, y: 18 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.45, delay: index * 0.05 }}
-            whileHover={{ y: -4, scale: 1.01 }}
+            transition={{ duration: 0.42, delay: index * 0.05 }}
+            whileHover={{ y: -3, scale: 1.03 }}
           >
-            <div className="flex items-start justify-between gap-4">
-              <div className="rounded-2xl border border-white/10 bg-white/5 p-3 text-accent shadow-[0_0_20px_rgba(59,224,255,0.14)]">
-                <Icon className="h-5 w-5" />
-              </div>
-              <span className="text-[11px] uppercase tracking-[0.22em] text-muted">
-                {item.category}
-              </span>
+            <span className="flex h-7 w-7 items-center justify-center rounded-full bg-white/10 text-[#c4b5fd] group-hover:text-[#dbeafe]">
+              <Icon className="h-4 w-4" />
+            </span>
+            <div className="flex items-center gap-2">
+              <h3 className="text-sm font-semibold tracking-wide text-white">{item.name}</h3>
+              <span className="text-[10px] uppercase tracking-[0.2em] text-white/50">{item.category}</span>
             </div>
-            <h3 className="mt-5 text-lg font-semibold text-white">{item.name}</h3>
           </motion.article>
         );
       })}

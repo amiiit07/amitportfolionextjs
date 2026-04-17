@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, useAnimationControls } from "framer-motion";
 import { Code2, Database, Layout } from "lucide-react";
 
 const statPills = [
@@ -11,18 +11,55 @@ const statPills = [
 ];
 
 export function HeroVisual() {
+  const portraitControls = useAnimationControls();
+  const ringControls = useAnimationControls();
+
+  async function handlePortraitClick() {
+    await Promise.all([
+      portraitControls.start({
+        scale: [1, 1.04, 0.985, 1],
+        rotate: [0, 0.8, -0.8, 0],
+        transition: { duration: 0.55, ease: "easeInOut" },
+      }),
+      ringControls.start({
+        scale: [1, 1.07, 1],
+        opacity: [0.82, 1, 0.84],
+        transition: { duration: 0.55, ease: "easeInOut" },
+      }),
+    ]);
+  }
+
   return (
     <div className="relative flex justify-center lg:justify-end">
       <motion.div
-        className="relative"
+        className="relative hero-visual-float"
         initial={{ opacity: 0, scale: 0.96, y: 20 }}
         whileInView={{ opacity: 1, scale: 1, y: 0 }}
         viewport={{ once: true, amount: 0.25 }}
         transition={{ duration: 0.7, ease: "easeOut" }}
+        animate={{
+          y: [0, -12, 0, 8, 0],
+          rotate: [0, 0.45, 0, -0.45, 0],
+        }}
       >
-        <div className="hero-portrait-wrap relative">
-          <div className="absolute inset-0 rounded-[10rem] bg-gradient-to-br from-accent/30 via-transparent to-accent-2/20 blur-3xl" />
-          <div className="hero-portrait-ring absolute inset-0 rounded-[10rem]" />
+        <motion.div
+          className="hero-portrait-wrap relative"
+          animate={portraitControls}
+          onClick={handlePortraitClick}
+          whileTap={{ scale: 0.98 }}
+          role="button"
+          tabIndex={0}
+          onKeyDown={(event) => {
+            if (event.key === "Enter" || event.key === " ") {
+              event.preventDefault();
+              void handlePortraitClick();
+            }
+          }}
+          aria-label="Animate profile image"
+        >
+          <div className="hero-portrait-aura absolute inset-0 rounded-[10rem]" />
+          <div className="hero-portrait-orbit absolute inset-0 rounded-[10rem]" />
+          <motion.div className="hero-portrait-ring absolute inset-0 rounded-[10rem]" animate={ringControls} />
           <div className="hero-portrait relative overflow-hidden rounded-[10rem] border-4 border-white/10">
             <Image
               src="/amiiit.png"
@@ -34,6 +71,8 @@ export function HeroVisual() {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
           </div>
+          <div className="hero-portrait-dot hero-portrait-dot-blue absolute left-5 top-8" />
+          <div className="hero-portrait-dot hero-portrait-dot-purple absolute bottom-14 right-7" />
           
           <motion.div
             className="absolute -bottom-2 -left-4 rounded-2xl border border-white/10 bg-black/60 px-4 py-3 backdrop-blur-xl md:hidden"
@@ -48,7 +87,7 @@ export function HeroVisual() {
               <span className="text-sm font-medium text-white">Let&apos;s talk</span>
             </div>
           </motion.div>
-        </div>
+        </motion.div>
 
         <div className="mt-8 hidden gap-4 sm:grid sm:grid-cols-3">
           {statPills.map((item, index) => (

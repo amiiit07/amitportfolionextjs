@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Send, Loader2, CheckCircle, AlertCircle } from "lucide-react";
+import { Send, Loader2 } from "lucide-react";
 
 type ContactFormProps = {
   action: (formData: FormData) => void | Promise<void>;
@@ -29,11 +29,6 @@ const budgets = [
 
 export function ContactForm({ action, returnTo = "/contact" }: ContactFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [mounted, setMounted] = useState(false);
-
-  useState(() => {
-    setMounted(true);
-  });
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     setIsSubmitting(true);

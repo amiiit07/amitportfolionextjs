@@ -1,21 +1,17 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Clock, Tag, ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { Reveal } from "@/components/reveal";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
-import { getBlogBySlug, getBlogs } from "@/lib/queries";
+import { getBlogBySlug } from "@/lib/queries";
 import { siteName } from "@/lib/site";
 
 type Props = {
   params: Promise<{ slug: string }>;
 };
-
-export async function generateStaticParams() {
-  const blogs = await getBlogs();
-  return blogs.map((blog) => ({ slug: blog.slug }));
-}
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
@@ -94,10 +90,13 @@ export default async function BlogPostPage({ params }: Props) {
           {blog.cover_image && (
             <Reveal>
               <div className="mt-10 overflow-hidden rounded-[1.8rem] border border-white/10">
-                <img
+                <Image
                   src={blog.cover_image}
                   alt={blog.title}
-                  className="w-full object-cover"
+                  width={1400}
+                  height={800}
+                  unoptimized
+                  className="h-auto w-full object-cover"
                 />
               </div>
             </Reveal>

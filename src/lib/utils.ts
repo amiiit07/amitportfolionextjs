@@ -12,7 +12,11 @@ export function slugify(input: string) {
     .replace(/^-+|-+$/g, "");
 }
 
-export function toArray(value: string) {
+export function toArray(value?: string | null) {
+  if (!value) {
+    return [];
+  }
+
   return value
     .split(",")
     .map((item) => item.trim())

@@ -42,9 +42,13 @@ npm install
 ```bash
 NEXT_PUBLIC_SUPABASE_URL=https://your-project-id.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key
+ADMIN_EMAIL=admin@example.com
+ADMIN_PASSWORD=change_this_to_a_strong_password
+NEXT_PUBLIC_SITE_URL=http://localhost:3000
 ```
 
-3. In Supabase SQL editor, run [supabase/schema.sql](/d:/amit%20react%20portfolio/supabase/schema.sql:1)
+3. In Supabase SQL editor, run `supabase/schema.sql`.
 
 4. Set `ADMIN_EMAIL` and `ADMIN_PASSWORD` in `.env.local`.
 
@@ -74,8 +78,16 @@ Deploy directly on Vercel:
 
 1. Push the project to GitHub
 2. Import the repo into Vercel
-3. Add the same Supabase environment variables in Vercel
-4. Redeploy
+3. In Vercel Project Settings > Environment Variables, add:
+	- `NEXT_PUBLIC_SUPABASE_URL`
+	- `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+	- `SUPABASE_SERVICE_ROLE_KEY`
+	- `ADMIN_EMAIL`
+	- `ADMIN_PASSWORD`
+	- `NEXT_PUBLIC_SITE_URL` (set this to your production domain, e.g. `https://yourdomain.com`)
+4. Set these variables for `Production` (and `Preview` if needed).
+5. Redeploy.
+6. Optional after first deploy: run `npm run seed:admin` locally once (with production env values) to ensure admin user/profile are created.
 
 ## Notes
 

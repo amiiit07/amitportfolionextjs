@@ -6,18 +6,22 @@ import type { Project } from "@/lib/types";
 
 type ProjectCardProps = {
   project: Project;
+  delay?: number;
 };
 
-export function ProjectCard({ project }: ProjectCardProps) {
+export function ProjectCard({ project, delay = 0 }: ProjectCardProps) {
   return (
     <motion.article
-      className="group relative overflow-hidden rounded-[2rem] border border-white/10 bg-gradient-to-br from-white/[0.06] to-white/[0.02] p-1"
-      whileHover={{ y: -4 }}
-      transition={{ type: "spring", stiffness: 200, damping: 18 }}
+      className="group relative overflow-hidden rounded-[2rem] border border-white/10 bg-gradient-to-br from-white/[0.07] via-white/[0.02] to-transparent p-1"
+      initial={{ opacity: 0, y: 26 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.22 }}
+      transition={{ duration: 0.5, delay, ease: "easeOut" }}
+      whileHover={{ y: -6, scale: 1.01 }}
     >
-      <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-br from-accent/20 via-transparent to-accent-3/10 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+      <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-br from-[#3b82f6]/20 via-transparent to-[#8b5cf6]/18 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
       
-      <div className="relative rounded-[1.8rem] bg-black/40 p-6 backdrop-blur-sm">
+      <div className="relative rounded-[1.8rem] bg-[#0c1429]/72 p-6 backdrop-blur-xl">
         <div className="flex items-start justify-between">
           <div className="flex items-center gap-4">
             {project.icon && (
@@ -26,20 +30,20 @@ export function ProjectCard({ project }: ProjectCardProps) {
               </span>
             )}
             <div>
-              <h3 className="text-xl font-bold text-white group-hover:text-accent transition-colors">
+              <h3 className="font-display text-xl font-bold text-white group-hover:text-[#a5b4fc] transition-colors">
                 {project.title}
               </h3>
-              <span className="mt-1 inline-block rounded-full border border-accent/30 bg-accent/10 px-3 py-0.5 text-xs font-medium text-accent">
+              <span className="mt-1 inline-block rounded-full border border-[#3b82f6]/30 bg-[#3b82f6]/10 px-3 py-0.5 text-xs font-medium text-[#bfdbfe]">
                 {project.status}
               </span>
             </div>
           </div>
           
-          {project.featured && (
-            <span className="rounded-full bg-gradient-to-r from-amber-500/20 to-orange-500/20 px-3 py-1 text-xs font-semibold text-amber-400 border border-amber-500/30">
+          {project.featured ? (
+            <span className="rounded-full border border-[#8b5cf6]/38 bg-[#8b5cf6]/18 px-3 py-1 text-xs font-semibold text-[#ddd6fe]">
               Featured
             </span>
-          )}
+          ) : null}
         </div>
 
         <p className="mt-4 text-sm leading-relaxed text-white/70">
@@ -50,7 +54,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
           {project.stack.slice(0, 5).map((tech) => (
             <span
               key={tech}
-              className="rounded-lg border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-medium text-white/70 transition-colors group-hover:border-accent/30 group-hover:bg-accent/10 group-hover:text-accent"
+              className="rounded-xl border border-white/12 bg-white/6 px-3 py-1.5 text-xs font-medium text-white/72 transition-colors group-hover:border-[#3b82f6]/34 group-hover:bg-[#3b82f6]/10 group-hover:text-[#dbeafe]"
             >
               {tech}
             </span>
@@ -63,19 +67,19 @@ export function ProjectCard({ project }: ProjectCardProps) {
         </div>
 
         <div className="mt-6 flex flex-wrap gap-3 border-t border-white/10 pt-5">
-          {project.live_url && (
+          {project.live_url ? (
             <a
               href={project.live_url}
               target="_blank"
               rel="noreferrer"
-              className="group/btn inline-flex items-center gap-2 rounded-xl border border-accent/50 bg-accent/15 px-4 py-2 text-sm font-semibold text-accent transition-all hover:bg-accent hover:text-black"
+              className="group/btn inline-flex items-center gap-2 rounded-xl border border-[#3b82f6]/48 bg-[#3b82f6]/18 px-4 py-2 text-sm font-semibold text-[#dbeafe] transition-all hover:bg-[#3b82f6] hover:text-white"
             >
               <ExternalLink size={16} />
               Live Demo
               <ArrowUpRight size={14} className="transition-transform group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
             </a>
-          )}
-          {project.repo_url && (
+          ) : null}
+          {project.repo_url ? (
             <a
               href={project.repo_url}
               target="_blank"
@@ -87,7 +91,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
               </svg>
               Code
             </a>
-          )}
+          ) : null}
         </div>
       </div>
     </motion.article>

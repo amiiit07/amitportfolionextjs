@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Mail, MapPin, Phone, ArrowRight, Sparkles } from "lucide-react";
+import { Mail, MapPin, Phone, Sparkles } from "lucide-react";
 import { submitContactAction } from "@/app/actions/contact";
 import { ContactForm } from "@/components/contact-form";
 import { Reveal } from "@/components/reveal";
