@@ -230,6 +230,7 @@ export const sampleProjects: Project[] = [
     description:
       "Full stack tourism platform with admin dashboard, CMS, contact system, and advanced authentication. Multi-user authentication system, real-time database management, responsive and modern design, admin dashboard with CMS, contact form integration.",
     stack: ["Node.js", "MongoDB", "Tailwind CSS", "Express", "EJS"],
+    icon: "🌍",
     live_url: "https://www.explorebihar.online/",
     repo_url: null,
     cover_image: null,
@@ -245,6 +246,7 @@ export const sampleProjects: Project[] = [
     description:
       "Web-based WHOIS lookup tool that fetches domain registration details such as registrar, status, creation date, and expiration date. Fast and accurate lookups, clean and intuitive UI, real-time API integration, registrar information display.",
     stack: ["JavaScript", "Node.js", "APIs", "HTML", "CSS"],
+    icon: "🔍",
     live_url: "https://whoislookup.onrender.com",
     repo_url: null,
     cover_image: null,
@@ -260,6 +262,7 @@ export const sampleProjects: Project[] = [
     description:
       "Responsive recipe search application that fetches and displays recipes dynamically from an external API. Real-time recipe search, responsive design across devices, efficient dynamic content rendering, clean user-friendly interface, dynamic recipe data fetching.",
     stack: ["HTML5", "CSS3", "JavaScript (ES6)", "External Recipe API"],
+    icon: "🍳",
     live_url: "https://recipeappamiit.netlify.app/",
     repo_url: null,
     cover_image: null,
@@ -275,6 +278,7 @@ export const sampleProjects: Project[] = [
     description:
       "Full stack event management and booking system with a comprehensive admin panel for events, services, bookings, galleries, blogs, packages, and testimonials. Secure JWT authentication with role-based access, online event booking with real-time validation, comprehensive admin dashboard with statistics, multi-image upload with Cloudinary integration.",
     stack: ["Node.js", "Express.js", "MongoDB", "Mongoose", "EJS", "Tailwind CSS", "JWT", "Cloudinary", "Nodemailer"],
+    icon: "🎉",
     live_url: "https://raj-events.onrender.com/",
     repo_url: null,
     cover_image: null,
@@ -290,6 +294,7 @@ export const sampleProjects: Project[] = [
     description:
       "B2B polymer sourcing platform for recycled and virgin plastic raw materials with bulk ordering and quote-driven procurement. Category-based product discovery for PET, HDPE, PVC, LDPE, PP, and PS, bulk order flow with quote and cart workflow, featured products with per-kg pricing and MOQ, B2B trust sections, delivery coverage, and industry use cases.",
     stack: ["Node.js", "Express", "MongoDB", "EJS", "Tailwind CSS"],
+    icon: "♻️",
     live_url: "https://www.granuleshub.com/",
     repo_url: null,
     cover_image: null,
@@ -305,6 +310,7 @@ export const sampleProjects: Project[] = [
     description:
       "Aviation training and placement-focused platform with career programs, counselling funnel, enquiry capture, and aviation branding for admissions. Aviation program showcase for pilot, ground staff, and hospitality tracks, quick enquiry and counselling registration flow, placement mentorship and testimonial sections.",
     stack: ["Node.js", "Express", "EJS", "Tailwind CSS", "JavaScript"],
+    icon: "✈️",
     live_url: "https://aero-tft2.onrender.com/",
     repo_url: null,
     cover_image: null,

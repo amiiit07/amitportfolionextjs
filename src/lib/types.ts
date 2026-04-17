@@ -41,6 +41,8 @@ export type Project = {
   status: "Planning" | "In Progress" | "Shipped";
   sort_order: number;
   created_at?: string;
+  github_link?: string | null;
+  features?: string[];
 };
 
 export type Contact = {
