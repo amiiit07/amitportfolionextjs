@@ -39,7 +39,7 @@ export function SiteHeader() {
         >
           <Link href="/" className="flex items-center gap-3 group">
             <div className="relative">
-              <span className="brand-mark text-2xl tracking-[0.2em]">AMIIIT</span>
+              <span className="brand-mark">AMIIIT</span>
               <div className="brand-line mt-1.5 opacity-60 group-hover:opacity-100 transition-opacity" />
               <div className="absolute -top-1 -right-2">
                 <Sparkles className="h-3 w-3 text-accent animate-pulse" />

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Mail, MapPin, Phone, Sparkles } from "lucide-react";
+import { Mail, MapPin, Sparkles } from "lucide-react";
 import { submitContactAction } from "@/app/actions/contact";
 import { ContactForm } from "@/components/contact-form";
 import { Reveal } from "@/components/reveal";
@@ -65,21 +65,6 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
                     <p className="text-xs uppercase tracking-wider text-white/40">Email</p>
                     <a href={`mailto:${settings.contact_email}`} className="text-sm font-medium text-white hover:text-accent transition-colors">
                       {settings.contact_email}
-                    </a>
-                  </div>
-                </div>
-              </div>
-
-              <div className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-sm transition-all hover:bg-white/10 hover:border-accent/30">
-                <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
-                <div className="relative flex items-center gap-4">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-accent/10 text-accent">
-                    <Phone size={20} />
-                  </div>
-                  <div>
-                    <p className="text-xs uppercase tracking-wider text-white/40">Phone</p>
-                    <a href={`tel:${settings.contact_phone}`} className="text-sm font-medium text-white hover:text-accent transition-colors">
-                      {settings.contact_phone}
                     </a>
                   </div>
                 </div>

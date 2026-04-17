@@ -73,20 +73,6 @@ export function HeroVisual() {
           </div>
           <div className="hero-portrait-dot hero-portrait-dot-blue absolute left-5 top-8" />
           <div className="hero-portrait-dot hero-portrait-dot-purple absolute bottom-14 right-7" />
-          
-          <motion.div
-            className="absolute -bottom-2 -left-4 rounded-2xl border border-white/10 bg-black/60 px-4 py-3 backdrop-blur-xl md:hidden"
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.3 }}
-          >
-            <p className="text-xs text-white/50">Available for work</p>
-            <div className="mt-1 flex items-center gap-2">
-              <span className="h-2 w-2 animate-pulse rounded-full bg-emerald-400" />
-              <span className="text-sm font-medium text-white">Let&apos;s talk</span>
-            </div>
-          </motion.div>
         </motion.div>
 
         <div className="mt-8 hidden gap-4 sm:grid sm:grid-cols-3">

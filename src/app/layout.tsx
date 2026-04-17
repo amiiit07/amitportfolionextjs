@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Space_Grotesk } from "next/font/google";
+import { Graduate, Inter, Space_Grotesk } from "next/font/google";
 import { CyberBackground } from "@/components/cyber-background";
 import { ScrollProgress } from "@/components/scroll-progress";
 import { ThreeBackground } from "@/components/three-background";
@@ -15,6 +15,13 @@ const inter = Inter({
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
   variable: "--font-space-grotesk",
+  display: "swap",
+});
+
+const graduate = Graduate({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-brand",
   display: "swap",
 });
 
@@ -63,7 +70,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${spaceGrotesk.variable} h-full antialiased`}
+      className={`${inter.variable} ${spaceGrotesk.variable} ${graduate.variable} h-full antialiased`}
       data-scroll-behavior="smooth"
     >
       <head>

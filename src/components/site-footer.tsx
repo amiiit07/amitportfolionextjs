@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { getSiteSettings } from "@/lib/queries";
-import { Sparkles, ArrowRight, Mail, MapPin, Phone } from "lucide-react";
+import { Sparkles, ArrowRight, Mail, MapPin } from "lucide-react";
 
 const footerLinks = [
   { href: "/", label: "Home" },
@@ -62,12 +62,6 @@ export async function SiteFooter() {
                     </div>
                     {settings.contact_email}
                   </a>
-                  <a href={`tel:${settings.contact_phone}`} className="flex items-center gap-3 text-sm text-white/70 hover:text-accent transition-colors">
-                    <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/5">
-                      <Phone size={14} />
-                    </div>
-                    {settings.contact_phone}
-                  </a>
                   <div className="flex items-center gap-3 text-sm text-white/70">
                     <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/5">
                       <MapPin size={14} />
@@ -96,7 +90,7 @@ export async function SiteFooter() {
                 <h3 className="text-sm font-semibold uppercase tracking-wider text-white/40">Connect</h3>
                 <div className="flex gap-3">
                   <a
-                    href="https://github.com/amit"
+                    href="https://github.com/amiiit07"
                     target="_blank"
                     rel="noreferrer"
                     className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-white/70 transition-all hover:bg-white/10 hover:border-accent/30 hover:text-accent"
@@ -106,7 +100,7 @@ export async function SiteFooter() {
                     </svg>
                   </a>
                   <a
-                    href="https://www.linkedin.com/in/amit"
+                    href="https://www.linkedin.com/in/amiiit07/"
                     target="_blank"
                     rel="noreferrer"
                     className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-white/70 transition-all hover:bg-white/10 hover:border-accent/30 hover:text-accent"
@@ -123,7 +117,7 @@ export async function SiteFooter() {
 
         <div className="mt-8 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 md:flex-row">
           <div className="flex items-center gap-3">
-            <span className="text-lg font-bold tracking-[0.2em] text-accent">AMIIIT</span>
+            <span className="brand-mark brand-mark-compact">AMIIIT</span>
             <span className="text-white/30">|</span>
             <p className="text-sm text-white/50">
               &copy; {currentYear} All rights reserved.

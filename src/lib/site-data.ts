@@ -104,8 +104,8 @@ export const portfolioStats = [
 ];
 
 export const socialLinks = [
-  { label: "GitHub", href: "https://github.com/amit" },
-  { label: "LinkedIn", href: "https://www.linkedin.com/in/amit" },
+  { label: "GitHub", href: "https://github.com/amiiit07" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/amiiit07/" },
 ];
 
 export const sampleTestimonials: Testimonial[] = [
@@ -327,7 +327,7 @@ export const fallbackSettings: SiteSettings = {
   hero_description:
     "Next.js, Node.js, Supabase, and MongoDB for modern products that look polished and scale cleanly.",
   availability_text: "Available for freelance, contract, and product-focused development work.",
-  contact_email: "hello@amit.dev",
+  contact_email: "akverma7295@gmail.com",
   contact_phone: "+91 98765 43210",
   location: "India · Remote",
 };

@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowUpRight, Code2, Layers, Sparkles } from "lucide-react";
+import { ArrowUpRight, BriefcaseBusiness, Code2, GitBranch, Layers, Sparkles } from "lucide-react";
+import { BlobProfile } from "./components/BlobProfile";
 import { ConversationCard } from "@/components/conversation-card";
-import { HeroVisual } from "@/components/hero-visual";
 import { LiquidButton } from "@/components/liquid-button";
 import { ProjectCard } from "@/components/project-card";
 import { Reveal } from "@/components/reveal";
@@ -70,7 +70,9 @@ export default async function HomePage() {
             </Reveal>
 
             <Reveal delay={0.08}>
-              <HeroVisual />
+              <div className="flex justify-center lg:justify-end">
+                <BlobProfile imageUrl="/amiiit.png" alt="Amit Kumar profile" size="lg" />
+              </div>
             </Reveal>
           </div>
         </section>
@@ -172,16 +174,53 @@ export default async function HomePage() {
             <ConversationCard email={settings.contact_email} location={settings.location} />
           </Reveal>
 
-          <div className="mt-7 flex flex-wrap items-center gap-4 border-t border-white/10 pt-6 text-xs uppercase tracking-[0.18em] text-white/45">
-            <span className="inline-flex items-center gap-2">
-              <Code2 size={14} />
-              React + Tailwind v4
-            </span>
-            <span className="inline-flex items-center gap-2">
-              <Layers size={14} />
-              Motion-First UI
-            </span>
-            <p className="text-white/35">© {new Date().getFullYear()} Amit Kumar</p>
+          <div className="mt-7 rounded-[1.4rem] border border-white/10 bg-white/[0.03] px-5 py-4 backdrop-blur-md md:px-6">
+            <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+              <div className="flex flex-wrap items-center gap-3 text-sm text-white/75">
+                <span className="brand-mark brand-mark-compact">AMIIIT</span>
+                <span className="text-white/30">|</span>
+                <span>© {new Date().getFullYear()} Amit Kumar</span>
+              </div>
+
+              <div className="flex flex-wrap items-center gap-2 text-xs uppercase tracking-[0.16em] text-white/45">
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-white/10 px-3 py-1.5">
+                  <Code2 size={13} />
+                  React + Tailwind v4
+                </span>
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-white/10 px-3 py-1.5">
+                  <Layers size={13} />
+                  Motion-First UI
+                </span>
+              </div>
+            </div>
+
+            <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-white/10 pt-3 text-sm text-white/60">
+              <Link href="/">Home</Link>
+              <Link href="/projects">Projects</Link>
+              <Link href="/blog">Blog</Link>
+              <a href={`mailto:${settings.contact_email}`}>{settings.contact_email}</a>
+
+              <div className="ml-auto flex items-center gap-2">
+                <a
+                  href="https://github.com/amiiit07"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white/70 hover:border-[#3b82f6]/55 hover:text-white"
+                  aria-label="GitHub"
+                >
+                  <GitBranch size={14} />
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/amiiit07/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white/70 hover:border-[#8b5cf6]/55 hover:text-white"
+                  aria-label="LinkedIn"
+                >
+                  <BriefcaseBusiness size={14} />
+                </a>
+              </div>
+            </div>
           </div>
         </section>
       </main>

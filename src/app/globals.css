@@ -172,12 +172,21 @@ select {
 }
 
 .brand-mark {
-  font-family: var(--font-display);
+  font-family: var(--font-brand), "Graduate", "Space Grotesk", serif;
   font-size: 2rem;
-  font-weight: 700;
+  font-weight: 400;
+  line-height: 0.95;
   letter-spacing: 0.22em;
-  color: #56d5ff;
-  text-shadow: 0 0 18px rgba(46, 203, 255, 0.28);
+  text-transform: uppercase;
+  color: #78dcff;
+  text-shadow:
+    0 0 12px rgba(56, 189, 248, 0.4),
+    0 0 24px rgba(59, 130, 246, 0.2);
+}
+
+.brand-mark-compact {
+  font-size: 1.2rem;
+  letter-spacing: 0.18em;
 }
 
 .brand-line {
@@ -677,7 +686,7 @@ select {
   }
 
   .brand-mark {
-    font-size: 1.45rem;
+    font-size: 1.3rem;
   }
 
   .brand-line {
