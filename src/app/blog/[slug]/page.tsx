@@ -3,11 +3,13 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Clock, Tag, ArrowLeft } from "lucide-react";
 import Link from "next/link";
+import { BlogCard } from "@/components/blog-card";
+import { BlogReadingProgress } from "@/components/blog-reading-progress";
 import { Reveal } from "@/components/reveal";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
-import { getBlogBySlug } from "@/lib/queries";
-import { siteName } from "@/lib/site";
+import { getBlogBySlug, getBlogs } from "@/lib/queries";
+import { getSiteUrl, siteName } from "@/lib/site";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -24,26 +26,82 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: blog.title,
     description: blog.excerpt,
+    keywords: blog.tags,
+    alternates: {
+      canonical: `/blog/${blog.slug}`,
+    },
     openGraph: {
       title: `${blog.title} | ${siteName}`,
       description: blog.excerpt,
       type: "article",
+      url: `/blog/${blog.slug}`,
+      images: blog.cover_image
+        ? [
+            {
+              url: blog.cover_image,
+              width: 1400,
+              height: 800,
+              alt: blog.title,
+            },
+          ]
+        : undefined,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: blog.title,
+      description: blog.excerpt,
+      images: blog.cover_image ? [blog.cover_image] : undefined,
     },
   };
 }
 
 export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params;
-  const blog = await getBlogBySlug(slug);
+  const [blog, allBlogs] = await Promise.all([getBlogBySlug(slug), getBlogs()]);
 
   if (!blog) {
     notFound();
   }
 
+  const relatedBlogs = allBlogs
+    .filter((item) => item.slug !== blog.slug)
+    .map((item) => {
+      const overlap = item.tags.filter((tag) => blog.tags.includes(tag)).length;
+      return { item, overlap };
+    })
+    .sort((a, b) => b.overlap - a.overlap)
+    .slice(0, 3)
+    .map((entry) => entry.item);
+
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: blog.title,
+    description: blog.excerpt,
+    image: blog.cover_image ? [blog.cover_image] : undefined,
+    datePublished: blog.created_at ?? new Date().toISOString(),
+    dateModified: blog.created_at ?? new Date().toISOString(),
+    author: {
+      "@type": "Person",
+      name: "Amit Kumar",
+    },
+    publisher: {
+      "@type": "Person",
+      name: "Amit Kumar",
+    },
+    url: new URL(`/blog/${blog.slug}`, getSiteUrl()).toString(),
+    keywords: blog.tags.join(", "),
+  };
+
   return (
     <>
       <SiteHeader />
+      <BlogReadingProgress targetId="blog-post-content" />
       <main className="page-shell py-14">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+        />
         <Link
           href="/blog"
           className="inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-accent"
@@ -103,7 +161,7 @@ export default async function BlogPostPage({ params }: Props) {
           )}
 
           <Reveal delay={0.1}>
-            <div className="surface mt-10 max-w-3xl rounded-[2rem] p-8 md:p-12">
+            <div id="blog-post-content" className="surface mt-10 max-w-3xl rounded-[2rem] p-8 md:p-12">
               <div className="prose prose-invert max-w-none">
                 {blog.content.split("\n\n").map((paragraph, i) => (
                   <p key={i} className="mb-6 text-base leading-relaxed text-white/85">
@@ -113,6 +171,21 @@ export default async function BlogPostPage({ params }: Props) {
               </div>
             </div>
           </Reveal>
+
+          {relatedBlogs.length > 0 ? (
+            <section className="mt-12">
+              <Reveal>
+                <h2 className="font-display text-2xl font-semibold text-white md:text-3xl">Related Posts</h2>
+              </Reveal>
+              <div className="mt-6 grid gap-6 lg:grid-cols-3">
+                {relatedBlogs.map((relatedBlog, index) => (
+                  <Reveal key={relatedBlog.id} delay={index * 0.06}>
+                    <BlogCard blog={relatedBlog} />
+                  </Reveal>
+                ))}
+              </div>
+            </section>
+          ) : null}
         </article>
       </main>
       <SiteFooter />

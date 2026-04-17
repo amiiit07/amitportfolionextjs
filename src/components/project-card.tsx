@@ -9,7 +9,27 @@ type ProjectCardProps = {
   delay?: number;
 };
 
+function getCaseStudy(project: Project) {
+  const summary = project.summary.trim();
+  const description = project.description.trim();
+
+  const problem = summary.endsWith(".") ? summary : `${summary}.`;
+  const solution = `Built using ${project.stack.slice(0, 3).join(", ")} with scalable structure and polished UI components.`;
+  const outcome =
+    project.status === "Shipped"
+      ? "Delivered to production with responsive UX and maintainable implementation."
+      : "In progress with iterative releases and performance-focused refinement.";
+
+  return {
+    problem,
+    solution,
+    outcome: description.length > 40 ? outcome : `${outcome} ${description}`,
+  };
+}
+
 export function ProjectCard({ project, delay = 0 }: ProjectCardProps) {
+  const caseStudy = getCaseStudy(project);
+
   return (
     <motion.article
       className="group relative overflow-hidden rounded-[2rem] border border-white/10 bg-gradient-to-br from-white/[0.07] via-white/[0.02] to-transparent p-1"
@@ -46,9 +66,20 @@ export function ProjectCard({ project, delay = 0 }: ProjectCardProps) {
           ) : null}
         </div>
 
-        <p className="mt-4 text-sm leading-relaxed text-white/70">
-          {project.summary}
-        </p>
+        <div className="mt-4 space-y-3">
+          <div className="rounded-xl border border-white/10 bg-white/[0.03] px-3 py-2.5">
+            <p className="text-[10px] uppercase tracking-[0.17em] text-white/50">Problem</p>
+            <p className="mt-1 text-xs leading-6 text-white/74">{caseStudy.problem}</p>
+          </div>
+          <div className="rounded-xl border border-white/10 bg-white/[0.03] px-3 py-2.5">
+            <p className="text-[10px] uppercase tracking-[0.17em] text-white/50">Solution</p>
+            <p className="mt-1 text-xs leading-6 text-white/74">{caseStudy.solution}</p>
+          </div>
+          <div className="rounded-xl border border-white/10 bg-white/[0.03] px-3 py-2.5">
+            <p className="text-[10px] uppercase tracking-[0.17em] text-white/50">Outcome</p>
+            <p className="mt-1 text-xs leading-6 text-white/74">{caseStudy.outcome}</p>
+          </div>
+        </div>
 
         <div className="mt-5 flex flex-wrap gap-2">
           {project.stack.slice(0, 5).map((tech) => (

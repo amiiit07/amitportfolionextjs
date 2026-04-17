@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { Menu, X, Sparkles } from "lucide-react";
-import { ThemeToggle } from "./theme-toggle";
 
 const links = [
   { href: "/", label: "Home" },
@@ -57,9 +56,6 @@ export function SiteHeader() {
                 {link.label}
               </Link>
             ))}
-            <div className="ml-2">
-              <ThemeToggle />
-            </div>
           </nav>
 
           <div className="flex items-center gap-2">
@@ -69,7 +65,6 @@ export function SiteHeader() {
             >
               Hire Me
             </Link>
-            <ThemeToggle className="md:hidden" />
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
               className="rounded-full p-2.5 md:hidden hover:bg-white/10 transition-colors"

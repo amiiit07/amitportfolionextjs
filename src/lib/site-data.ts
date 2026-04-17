@@ -146,6 +146,20 @@ export const sampleTestimonials: Testimonial[] = [
 
 export const sampleBlogs: Blog[] = [
   {
+    id: "blog-0",
+    title: "Hi, I'm Amit Kumar - BCA Student and Aspiring Full Stack Developer from Patna, Bihar",
+    slug: "amit-kumar-bca-student-full-stack-developer-patna-bihar",
+    excerpt: "My journey from curiosity to coding, technical skills across frontend/backend/data, and my vision to build impactful digital products.",
+    content:
+      "Hi, I am Amit Kumar, a passionate and dedicated BCA student from Patna, Bihar, currently pursuing my degree at CIMAGE Catalyst College, Patna. I have a strong interest in technology, web development, software engineering, and modern digital solutions. My journey in the tech world started with curiosity, and today it has become my career goal.\n\nTechnical Skills\n\nFrontend Development: HTML, CSS, Tailwind CSS, JavaScript\nBackend Development: Node.js, Express.js, PHP\nDatabase: MongoDB, SQL, FoxPro\nProgramming Languages: C, JavaScript, Python (Basic)\nData Analysis Tools: Power BI, Pandas, NumPy, Matplotlib\nNetworking: Computer Networking, CCNA Basics\nOther Skills: Embedded Systems, GitHub, Deployment Platforms\n\nCareer Objective\n\nMy goal is to become a successful Full Stack Developer and build impactful digital products that solve real-world problems. I am continuously learning new technologies like Next.js, Supabase, Flutter, and AI tools to stay ahead in the tech industry.\n\nPersonal Strengths\n\nFast Learner\nProblem Solver\nTeam Player\nCreative Thinker\nHardworking and Consistent\nPassionate About Technology",
+    cover_image: null,
+    tags: ["About Me", "Full Stack", "Patna", "Bihar", "Career"],
+    published: true,
+    featured: true,
+    reading_time: 5,
+    sort_order: 0,
+  },
+  {
     id: "blog-1",
     title: "Building Modern Web Applications with Next.js 14",
     slug: "building-modern-web-applications-nextjs-14",

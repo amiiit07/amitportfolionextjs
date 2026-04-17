@@ -155,12 +155,12 @@ export async function getBlogs() {
     .order("sort_order", { ascending: true })
     .returns<Blog[]>();
 
-  return data ?? [];
+  return data?.length ? data : sampleBlogs;
 }
 
 export async function getBlogBySlug(slug: string) {
   if (!isSupabaseConfigured()) {
-    return null as Blog | null;
+    return sampleBlogs.find((blog) => blog.slug === slug) ?? null;
   }
 
   const supabase = await createSupabaseServerClient();
@@ -175,7 +175,7 @@ export async function getBlogBySlug(slug: string) {
     .eq("published", true)
     .single<Blog>();
 
-  return data ?? null;
+  return data ?? sampleBlogs.find((blog) => blog.slug === slug) ?? null;
 }
 
 export async function getTestimonials() {

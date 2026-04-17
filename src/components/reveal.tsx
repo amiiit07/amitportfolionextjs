@@ -39,10 +39,10 @@ export function Reveal({
       className={className}
       initial={initial}
       whileInView={{ opacity: 1, y: 0, x: 0 }}
-      viewport={{ once, amount: 0.15 }}
+      viewport={{ once, amount: 0.12, margin: "0px 0px -40px 0px" }}
       transition={{ 
         duration: shouldReduceMotion ? 0.2 : duration, 
-        ease: "easeOut", 
+        ease: [0.22, 1, 0.36, 1], 
         delay: shouldReduceMotion ? 0 : delay 
       }}
     >

@@ -50,15 +50,28 @@ export const metadata: Metadata = {
 
 const schemaData = {
   "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Amit Kumar",
-  "url": getSiteUrl(),
-  "jobTitle": "Full Stack Developer",
-  "description": siteDescription,
-  "knowsAbout": ["Next.js", "React", "Node.js", "TypeScript", "MongoDB", "Supabase"],
-  "sameAs": [
-    "https://github.com/amit",
-    "https://www.linkedin.com/in/amit"
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": new URL("/#website", getSiteUrl()).toString(),
+      "url": getSiteUrl().toString(),
+      "name": siteName,
+      "description": siteDescription,
+      "inLanguage": "en-US",
+    },
+    {
+      "@type": "Person",
+      "@id": new URL("/#person", getSiteUrl()).toString(),
+      "name": "Amit Kumar",
+      "url": getSiteUrl().toString(),
+      "jobTitle": "Frontend Engineer",
+      "description": siteDescription,
+      "knowsAbout": ["Next.js", "React", "TypeScript", "Tailwind CSS", "Framer Motion", "Supabase"],
+      "sameAs": [
+        "https://github.com/amiiit07",
+        "https://www.linkedin.com/in/amiiit07/",
+      ],
+    },
   ],
 };
 
