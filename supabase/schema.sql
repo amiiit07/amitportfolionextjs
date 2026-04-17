@@ -40,6 +40,36 @@ create table if not exists public.projects (
   updated_at timestamptz not null default timezone('utc', now())
 );
 
+create table if not exists public.blogs (
+  id uuid primary key default gen_random_uuid(),
+  title text not null,
+  slug text not null unique,
+  excerpt text not null,
+  content text not null,
+  cover_image text,
+  tags text[] not null default '{}',
+  published boolean not null default true,
+  featured boolean not null default false,
+  reading_time integer not null default 5,
+  sort_order integer not null default 0,
+  created_at timestamptz not null default timezone('utc', now()),
+  updated_at timestamptz not null default timezone('utc', now())
+);
+
+create table if not exists public.testimonials (
+  id uuid primary key default gen_random_uuid(),
+  client_name text not null,
+  client_role text not null,
+  company text not null,
+  content text not null,
+  rating integer not null default 5,
+  avatar_url text,
+  featured boolean not null default true,
+  sort_order integer not null default 0,
+  created_at timestamptz not null default timezone('utc', now()),
+  updated_at timestamptz not null default timezone('utc', now())
+);
+
 create table if not exists public.contacts (
   id uuid primary key default gen_random_uuid(),
   name text not null,
@@ -89,6 +119,18 @@ execute function public.set_updated_at();
 drop trigger if exists projects_set_updated_at on public.projects;
 create trigger projects_set_updated_at
 before update on public.projects
+for each row
+execute function public.set_updated_at();
+
+drop trigger if exists blogs_set_updated_at on public.blogs;
+create trigger blogs_set_updated_at
+before update on public.blogs
+for each row
+execute function public.set_updated_at();
+
+drop trigger if exists testimonials_set_updated_at on public.testimonials;
+create trigger testimonials_set_updated_at
+before update on public.testimonials
 for each row
 execute function public.set_updated_at();
 
@@ -151,6 +193,8 @@ on conflict (id) do nothing;
 alter table public.admin_profiles enable row level security;
 alter table public.site_settings enable row level security;
 alter table public.projects enable row level security;
+alter table public.blogs enable row level security;
+alter table public.testimonials enable row level security;
 alter table public.contacts enable row level security;
 alter table public.activity_logs enable row level security;
 
@@ -216,6 +260,36 @@ with check (auth.uid() = id or public.is_admin_user(auth.uid()));
 drop policy if exists "Admins can manage projects" on public.projects;
 create policy "Admins can manage projects"
 on public.projects
+for all
+to authenticated
+using (public.is_admin_user(auth.uid()))
+with check (public.is_admin_user(auth.uid()));
+
+drop policy if exists "Public can read blogs" on public.blogs;
+create policy "Public can read blogs"
+on public.blogs
+for select
+to anon, authenticated
+using (published = true);
+
+drop policy if exists "Admins can manage blogs" on public.blogs;
+create policy "Admins can manage blogs"
+on public.blogs
+for all
+to authenticated
+using (public.is_admin_user(auth.uid()))
+with check (public.is_admin_user(auth.uid()));
+
+drop policy if exists "Public can read testimonials" on public.testimonials;
+create policy "Public can read testimonials"
+on public.testimonials
+for select
+to anon, authenticated
+using (true);
+
+drop policy if exists "Admins can manage testimonials" on public.testimonials;
+create policy "Admins can manage testimonials"
+on public.testimonials
 for all
 to authenticated
 using (public.is_admin_user(auth.uid()))

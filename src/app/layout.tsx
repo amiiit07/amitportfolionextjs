@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Graduate, Inter, Space_Grotesk } from "next/font/google";
 import { CyberBackground } from "@/components/cyber-background";
+import { Providers } from "@/components/providers";
 import { ScrollProgress } from "@/components/scroll-progress";
 import { ThreeBackground } from "@/components/three-background";
 import { getSiteUrl, siteDescription, siteName } from "@/lib/site";
@@ -93,10 +94,12 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full flex flex-col">
-        <CyberBackground />
-        <ThreeBackground />
-        <ScrollProgress />
-        {children}
+        <Providers>
+          <CyberBackground />
+          <ThreeBackground />
+          <ScrollProgress />
+          {children}
+        </Providers>
       </body>
     </html>
   );
