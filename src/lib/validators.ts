@@ -49,3 +49,28 @@ export const settingsSchema = z.object({
   location: z.string().trim().min(2, "Location is required."),
 });
 
+export const blogSchema = z.object({
+  id: z.string().optional(),
+  title: z.string().trim().min(3, "Blog title is required."),
+  slug: z.string().trim().optional().or(z.literal("")),
+  excerpt: z.string().trim().min(20, "Add an excerpt."),
+  content: z.string().trim().min(50, "Add blog content."),
+  coverImage: z.string().url().optional().or(z.literal("")),
+  tags: z.string().trim().optional().or(z.literal("")),
+  published: z.enum(["true", "false"]),
+  featured: z.enum(["true", "false"]),
+  sortOrder: z.coerce.number().min(0).max(999),
+});
+
+export const testimonialSchema = z.object({
+  id: z.string().optional(),
+  clientName: z.string().trim().min(2, "Client name is required."),
+  clientRole: z.string().trim().min(2, "Client role is required."),
+  company: z.string().trim().min(2, "Company name is required."),
+  content: z.string().trim().min(30, "Add testimonial content."),
+  rating: z.coerce.number().min(1).max(5),
+  avatarUrl: z.string().url().optional().or(z.literal("")),
+  featured: z.enum(["true", "false"]),
+  sortOrder: z.coerce.number().min(0).max(999),
+});
+

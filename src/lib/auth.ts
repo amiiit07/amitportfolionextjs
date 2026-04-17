@@ -10,8 +10,10 @@ const localAdminEmail = process.env.ADMIN_EMAIL?.trim();
 const localAdminPassword = process.env.ADMIN_PASSWORD;
 export const localAdminCookieName = "admin-session";
 
+import type { SupabaseClient } from "@supabase/supabase-js";
+
 type SessionBase = {
-  supabase: any;
+  supabase: SupabaseClient | null;
   user: { id: string; email?: string } | null;
   unavailable: boolean;
   localAuth: boolean;

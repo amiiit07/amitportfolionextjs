@@ -27,6 +27,6 @@ export async function logAdminActivity({
       details,
       admin_email: session.user.email ?? null,
     },
-  ] as any);
+  ]);
 }
 

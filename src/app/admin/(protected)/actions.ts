@@ -7,7 +7,7 @@ import { logAdminActivity } from "@/lib/activity";
 import { requireAdmin } from "@/lib/auth";
 import { localAdminCookieName } from "@/lib/auth";
 import { slugify, toArray } from "@/lib/utils";
-import { contactAdminSchema, projectSchema, settingsSchema } from "@/lib/validators";
+import { blogSchema, contactAdminSchema, projectSchema, settingsSchema, testimonialSchema } from "@/lib/validators";
 import type { createSupabaseServerClient } from "@/lib/supabase/server";
 
 type SupabaseClient = NonNullable<Awaited<ReturnType<typeof createSupabaseServerClient>>>;
@@ -255,4 +255,247 @@ export async function updateSettingsAction(formData: FormData) {
   revalidatePath("/about");
   revalidatePath("/contact");
   revalidatePath("/admin/settings");
+}
+
+export async function createBlogAction(formData: FormData) {
+  const parsed = blogSchema.safeParse({
+    title: formData.get("title"),
+    slug: formData.get("slug"),
+    excerpt: formData.get("excerpt"),
+    content: formData.get("content"),
+    coverImage: formData.get("coverImage"),
+    tags: formData.get("tags"),
+    published: formData.get("published"),
+    featured: formData.get("featured"),
+    sortOrder: formData.get("sortOrder"),
+  });
+
+  if (!parsed.success) {
+    return;
+  }
+
+  const session = await requireAdmin();
+  const supabase = getProtectedSupabase(session);
+
+  const slug = parsed.data.slug || slugify(parsed.data.title);
+  const contentLength = parsed.data.content.split(/\s+/).length;
+  const readingTime = Math.ceil(contentLength / 200);
+
+  const { data } = await supabase
+    .from("blogs")
+    .insert({
+      title: parsed.data.title,
+      slug,
+      excerpt: parsed.data.excerpt,
+      content: parsed.data.content,
+      cover_image: parsed.data.coverImage || null,
+      tags: toArray(parsed.data.tags),
+      published: parsed.data.published === "true",
+      featured: parsed.data.featured === "true",
+      reading_time: readingTime,
+      sort_order: parsed.data.sortOrder,
+    })
+    .select("id")
+    .single<{ id: string }>();
+
+  await logAdminActivity({
+    action: "blog.created",
+    entityType: "blog",
+    entityId: data?.id,
+    details: parsed.data.title,
+  });
+
+  revalidatePath("/blog");
+  revalidatePath("/admin/blogs");
+  revalidatePath("/admin/dashboard");
+}
+
+export async function updateBlogAction(formData: FormData) {
+  const parsed = blogSchema.safeParse({
+    id: formData.get("id"),
+    title: formData.get("title"),
+    slug: formData.get("slug"),
+    excerpt: formData.get("excerpt"),
+    content: formData.get("content"),
+    coverImage: formData.get("coverImage"),
+    tags: formData.get("tags"),
+    published: formData.get("published"),
+    featured: formData.get("featured"),
+    sortOrder: formData.get("sortOrder"),
+  });
+
+  if (!parsed.success || !parsed.data.id) {
+    return;
+  }
+
+  const session = await requireAdmin();
+  const supabase = getProtectedSupabase(session);
+
+  const contentLength = parsed.data.content.split(/\s+/).length;
+  const readingTime = Math.ceil(contentLength / 200);
+
+  await supabase
+    .from("blogs")
+    .update({
+      title: parsed.data.title,
+      slug: parsed.data.slug || slugify(parsed.data.title),
+      excerpt: parsed.data.excerpt,
+      content: parsed.data.content,
+      cover_image: parsed.data.coverImage || null,
+      tags: toArray(parsed.data.tags),
+      published: parsed.data.published === "true",
+      featured: parsed.data.featured === "true",
+      reading_time: readingTime,
+      sort_order: parsed.data.sortOrder,
+    })
+    .eq("id", parsed.data.id);
+
+  await logAdminActivity({
+    action: "blog.updated",
+    entityType: "blog",
+    entityId: parsed.data.id,
+    details: parsed.data.title,
+  });
+
+  revalidatePath("/blog");
+  revalidatePath("/admin/blogs");
+  revalidatePath("/admin/dashboard");
+}
+
+export async function deleteBlogAction(formData: FormData) {
+  const id = formData.get("id");
+
+  if (typeof id !== "string" || !id) {
+    return;
+  }
+
+  const session = await requireAdmin();
+  const supabase = getProtectedSupabase(session);
+
+  await supabase.from("blogs").delete().eq("id", id);
+
+  await logAdminActivity({
+    action: "blog.deleted",
+    entityType: "blog",
+    entityId: id,
+  });
+
+  revalidatePath("/blog");
+  revalidatePath("/admin/blogs");
+  revalidatePath("/admin/dashboard");
+}
+
+export async function createTestimonialAction(formData: FormData) {
+  const parsed = testimonialSchema.safeParse({
+    clientName: formData.get("clientName"),
+    clientRole: formData.get("clientRole"),
+    company: formData.get("company"),
+    content: formData.get("content"),
+    rating: formData.get("rating"),
+    avatarUrl: formData.get("avatarUrl"),
+    featured: formData.get("featured"),
+    sortOrder: formData.get("sortOrder"),
+  });
+
+  if (!parsed.success) {
+    return;
+  }
+
+  const session = await requireAdmin();
+  const supabase = getProtectedSupabase(session);
+
+  const { data } = await supabase
+    .from("testimonials")
+    .insert({
+      client_name: parsed.data.clientName,
+      client_role: parsed.data.clientRole,
+      company: parsed.data.company,
+      content: parsed.data.content,
+      rating: parsed.data.rating,
+      avatar_url: parsed.data.avatarUrl || null,
+      featured: parsed.data.featured === "true",
+      sort_order: parsed.data.sortOrder,
+    })
+    .select("id")
+    .single<{ id: string }>();
+
+  await logAdminActivity({
+    action: "testimonial.created",
+    entityType: "testimonial",
+    entityId: data?.id,
+    details: parsed.data.clientName,
+  });
+
+  revalidatePath("/testimonials");
+  revalidatePath("/admin/testimonials");
+  revalidatePath("/admin/dashboard");
+}
+
+export async function updateTestimonialAction(formData: FormData) {
+  const parsed = testimonialSchema.safeParse({
+    id: formData.get("id"),
+    clientName: formData.get("clientName"),
+    clientRole: formData.get("clientRole"),
+    company: formData.get("company"),
+    content: formData.get("content"),
+    rating: formData.get("rating"),
+    avatarUrl: formData.get("avatarUrl"),
+    featured: formData.get("featured"),
+    sortOrder: formData.get("sortOrder"),
+  });
+
+  if (!parsed.success || !parsed.data.id) {
+    return;
+  }
+
+  const session = await requireAdmin();
+  const supabase = getProtectedSupabase(session);
+
+  await supabase
+    .from("testimonials")
+    .update({
+      client_name: parsed.data.clientName,
+      client_role: parsed.data.clientRole,
+      company: parsed.data.company,
+      content: parsed.data.content,
+      rating: parsed.data.rating,
+      avatar_url: parsed.data.avatarUrl || null,
+      featured: parsed.data.featured === "true",
+      sort_order: parsed.data.sortOrder,
+    })
+    .eq("id", parsed.data.id);
+
+  await logAdminActivity({
+    action: "testimonial.updated",
+    entityType: "testimonial",
+    entityId: parsed.data.id,
+    details: parsed.data.clientName,
+  });
+
+  revalidatePath("/testimonials");
+  revalidatePath("/admin/testimonials");
+  revalidatePath("/admin/dashboard");
+}
+
+export async function deleteTestimonialAction(formData: FormData) {
+  const id = formData.get("id");
+
+  if (typeof id !== "string" || !id) {
+    return;
+  }
+
+  const session = await requireAdmin();
+  const supabase = getProtectedSupabase(session);
+
+  await supabase.from("testimonials").delete().eq("id", id);
+
+  await logAdminActivity({
+    action: "testimonial.deleted",
+    entityType: "testimonial",
+    entityId: id,
+  });
+
+  revalidatePath("/testimonials");
+  revalidatePath("/admin/testimonials");
+  revalidatePath("/admin/dashboard");
 }

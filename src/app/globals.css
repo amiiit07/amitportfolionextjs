@@ -16,6 +16,22 @@
   --ring: rgba(46, 203, 255, 0.24);
 }
 
+[data-theme="light"] {
+  --background: #f8fafc;
+  --background-alt: #f1f5f9;
+  --foreground: #0f172a;
+  --surface: rgba(255, 255, 255, 0.8);
+  --surface-strong: rgba(241, 245, 249, 0.92);
+  --card-border: rgba(15, 23, 42, 0.12);
+  --card-border-strong: rgba(15, 23, 42, 0.2);
+  --accent: #0284c7;
+  --accent-2: #0369a1;
+  --accent-3: #38bdf8;
+  --accent-4: #e0f2fe;
+  --muted: #64748b;
+  --ring: rgba(2, 132, 199, 0.15);
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-background-alt: var(--background-alt);
@@ -52,6 +68,33 @@ body {
   font-family: var(--font-sans);
 }
 
+[data-theme="light"] body {
+  background:
+    radial-gradient(circle at 18% 18%, rgba(2, 132, 199, 0.08), transparent 22%),
+    radial-gradient(circle at 82% 26%, rgba(14, 165, 233, 0.1), transparent 26%),
+    linear-gradient(180deg, #f8fafc 0%, #f1f5f9 54%, #e2e8f0 100%);
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(circle at center, black 32%, transparent 82%);
+  opacity: 0.18;
+}
+
+[data-theme="light"] body::before {
+  background-image:
+    linear-gradient(rgba(15, 23, 42, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15, 23, 42, 0.03) 1px, transparent 1px);
+  opacity: 0.4;
+}
+
 body::before {
   content: "";
   position: fixed;
@@ -75,6 +118,12 @@ body::after {
     radial-gradient(circle at 88% 48%, rgba(53, 163, 255, 0.12), transparent 25%);
   filter: blur(70px);
   opacity: 0.8;
+}
+
+[data-theme="light"] body::after {
+  background:
+    radial-gradient(circle at 60% 32%, rgba(2, 132, 199, 0.08), transparent 20%),
+    radial-gradient(circle at 88% 48%, rgba(14, 165, 233, 0.1), transparent 25%);
 }
 
 a,

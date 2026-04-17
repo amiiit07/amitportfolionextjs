@@ -1,3 +1,31 @@
+export type Blog = {
+  id: string;
+  title: string;
+  slug: string;
+  excerpt: string;
+  content: string;
+  cover_image: string | null;
+  tags: string[];
+  published: boolean;
+  featured: boolean;
+  reading_time: number;
+  sort_order: number;
+  created_at?: string;
+};
+
+export type Testimonial = {
+  id: string;
+  client_name: string;
+  client_role: string;
+  company: string;
+  content: string;
+  rating: number;
+  avatar_url: string | null;
+  featured: boolean;
+  sort_order: number;
+  created_at?: string;
+};
+
 export type Project = {
   id: string;
   title: string;
@@ -5,6 +33,7 @@ export type Project = {
   summary: string;
   description: string;
   stack: string[];
+  icon: string;
   live_url: string | null;
   repo_url: string | null;
   cover_image: string | null;

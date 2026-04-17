@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Download, FileText, ArrowRight } from "lucide-react";
 import { submitContactAction } from "@/app/actions/contact";
+import { BlogCard } from "@/components/blog-card";
 import { ContactForm } from "@/components/contact-form";
 import { HeroVisual } from "@/components/hero-visual";
 import { ProjectCard } from "@/components/project-card";
@@ -12,9 +14,10 @@ import { SkillsGrid } from "@/components/skills-grid";
 import { SocialLinks } from "@/components/social-links";
 import { StatsGrid } from "@/components/stats-grid";
 import { TechStackGrid } from "@/components/tech-stack-grid";
+import { TypingEffect } from "@/components/typing-effect";
 import { aboutHighlights, experienceTimeline } from "@/lib/site-data";
 import { siteDescription, siteName } from "@/lib/site";
-import { getProjects, getSiteSettings } from "@/lib/queries";
+import { getBlogs, getFeaturedTestimonials, getProjects, getSiteSettings } from "@/lib/queries";
 
 export const metadata: Metadata = {
   title: "Full Stack Developer",
@@ -27,6 +30,9 @@ export const metadata: Metadata = {
     description: siteDescription,
     url: "/",
   },
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 type HomePageProps = {
@@ -38,10 +44,12 @@ function getParam(value: string | string[] | undefined) {
 }
 
 export default async function HomePage({ searchParams }: HomePageProps) {
-  const [settings, projects, params] = await Promise.all([
+  const [settings, projects, params, blogs, testimonials] = await Promise.all([
     getSiteSettings(),
     getProjects(),
     searchParams,
+    getBlogs(),
+    getFeaturedTestimonials(),
   ]);
   const success = getParam(params.success);
   const error = getParam(params.error);
@@ -58,7 +66,10 @@ export default async function HomePage({ searchParams }: HomePageProps) {
                 Hi, I&apos;m <span>Amit Kumar</span>
               </h1>
               <p className="max-w-2xl text-3xl font-medium text-white/88 md:text-4xl">
-                Full Stack Developer
+                <TypingEffect
+                  texts={["Full Stack Developer", "Next.js Expert", "UI/UX Enthusiast", "Problem Solver"]}
+                  className="text-accent"
+                />
               </p>
               <p className="max-w-2xl text-base leading-8 text-muted md:text-lg">
                 I build professional web applications with Next.js, Node.js, Supabase, and
@@ -73,6 +84,25 @@ export default async function HomePage({ searchParams }: HomePageProps) {
               <a href="#contact" className="secondary-cta rounded-2xl px-8 py-4 text-lg font-semibold">
                 Contact Me
               </a>
+            </div>
+
+            <div className="flex flex-wrap gap-4 pt-2">
+              <a
+                href="/resume.pdf"
+                download
+                className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-5 py-2.5 text-sm font-medium text-white transition-all hover:bg-white/10"
+              >
+                <Download size={16} />
+                Download Resume
+              </a>
+              <Link
+                href="/services"
+                className="inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-accent"
+              >
+                <FileText size={16} />
+                View Services
+                <ArrowRight size={14} />
+              </Link>
             </div>
           </Reveal>
 
@@ -181,6 +211,93 @@ export default async function HomePage({ searchParams }: HomePageProps) {
             <StatsGrid />
           </div>
         </section>
+
+        {testimonials.length > 0 && (
+          <section className="page-shell mt-18">
+            <Reveal>
+              <SectionHeading
+                label="Testimonials"
+                title="What clients say about my work."
+                description="Trusted by businesses for delivering quality web solutions on time."
+              />
+            </Reveal>
+
+            <div className="mt-10 grid gap-6 lg:grid-cols-3">
+              {testimonials.slice(0, 3).map((testimonial, index) => (
+                <Reveal key={testimonial.id} delay={index * 0.08}>
+                  <article className="surface h-full rounded-[1.8rem] p-6">
+                    <div className="mb-3 flex gap-1">
+                      {Array.from({ length: 5 }).map((_, i) => (
+                        <span
+                          key={i}
+                          className={`text-lg ${i < testimonial.rating ? "text-accent" : "text-white/20"}`}
+                        >
+                          ★
+                        </span>
+                      ))}
+                    </div>
+                    <blockquote className="text-sm leading-relaxed text-white/85">
+                      &ldquo;{testimonial.content}&rdquo;
+                    </blockquote>
+                    <div className="mt-4 flex items-center gap-3">
+                      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-accent/20 text-sm font-semibold text-accent">
+                        {testimonial.client_name.charAt(0)}
+                      </div>
+                      <div>
+                        <p className="text-sm font-medium text-white">{testimonial.client_name}</p>
+                        <p className="text-xs text-muted">{testimonial.company}</p>
+                      </div>
+                    </div>
+                  </article>
+                </Reveal>
+              ))}
+            </div>
+
+            <Reveal delay={0.1}>
+              <div className="mt-6 text-center">
+                <Link
+                  href="/testimonials"
+                  className="inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-accent"
+                >
+                  View all testimonials
+                  <ArrowRight size={14} />
+                </Link>
+              </div>
+            </Reveal>
+          </section>
+        )}
+
+        {blogs.length > 0 && (
+          <section className="page-shell mt-18">
+            <Reveal>
+              <SectionHeading
+                label="Blog"
+                title="Latest articles and tutorials."
+                description="Insights on web development, React, and building modern applications."
+              />
+            </Reveal>
+
+            <div className="mt-10 grid gap-6 lg:grid-cols-3">
+              {blogs.slice(0, 3).map((blog, index) => (
+                <Reveal key={blog.id} delay={index * 0.08}>
+                  <BlogCard blog={blog} />
+                </Reveal>
+              ))}
+            </div>
+
+            <Reveal delay={0.1}>
+              <div className="mt-6 text-center">
+                <Link
+                  href="/blog"
+                  className="inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-accent"
+                >
+                  View all posts
+                  <ArrowRight size={14} />
+                </Link>
+              </div>
+            </Reveal>
+          </section>
+        )}
 
         <section id="contact" className="page-shell mt-18 grid gap-8 lg:grid-cols-[0.88fr_1.12fr]">
           <Reveal>

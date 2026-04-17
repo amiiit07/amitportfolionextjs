@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowUpRight, GitBranch } from "lucide-react";
+import { ArrowUpRight, Clock, GitBranch } from "lucide-react";
 import { motion } from "framer-motion";
 import type { Project } from "@/lib/types";
 
@@ -8,7 +8,14 @@ type ProjectCardProps = {
   project: Project;
 };
 
+function calculateReadingTime(text: string): number {
+  const words = text.split(/\s+/).length;
+  return Math.max(1, Math.ceil(words / 200));
+}
+
 export function ProjectCard({ project }: ProjectCardProps) {
+  const readingTime = calculateReadingTime(project.description);
+
   return (
     <motion.article
       className="surface group rounded-[2rem] p-5 md:p-6"
@@ -49,7 +56,11 @@ export function ProjectCard({ project }: ProjectCardProps) {
         <span className="status-chip rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em]">
           {project.status}
         </span>
-        <div className="flex flex-wrap gap-2 text-xs text-muted">
+        <div className="flex flex-wrap items-center gap-3 text-xs text-muted">
+          <span className="inline-flex items-center gap-1">
+            <Clock size={14} />
+            {readingTime} min read
+          </span>
           {project.stack.slice(0, 3).map((item) => (
             <span key={item} className="rounded-full border border-white/10 bg-white/4 px-3 py-1">
               {item}

@@ -1,13 +1,15 @@
-import { fallbackSettings, sampleProjects } from "@/lib/site-data";
+import { fallbackSettings, sampleBlogs, sampleProjects, sampleTestimonials } from "@/lib/site-data";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { isSupabaseConfigured } from "@/lib/supabase/env";
 import type {
   ActivityLog,
   AdminProfile,
+  Blog,
   Contact,
   DashboardSnapshot,
   Project,
   SiteSettings,
+  Testimonial,
 } from "@/lib/types";
 
 export async function getSiteSettings() {
@@ -134,6 +136,70 @@ export async function getActivityLogs() {
     .returns<ActivityLog[]>();
 
   return data ?? [];
+}
+
+export async function getBlogs() {
+  if (!isSupabaseConfigured()) {
+    return sampleBlogs;
+  }
+
+  const supabase = await createSupabaseServerClient();
+  if (!supabase) {
+    return [] as Blog[];
+  }
+
+  const { data } = await supabase
+    .from("blogs")
+    .select("id, title, slug, excerpt, content, cover_image, tags, published, featured, reading_time, sort_order, created_at")
+    .eq("published", true)
+    .order("sort_order", { ascending: true })
+    .returns<Blog[]>();
+
+  return data ?? [];
+}
+
+export async function getBlogBySlug(slug: string) {
+  if (!isSupabaseConfigured()) {
+    return null as Blog | null;
+  }
+
+  const supabase = await createSupabaseServerClient();
+  if (!supabase) {
+    return null as Blog | null;
+  }
+
+  const { data } = await supabase
+    .from("blogs")
+    .select("id, title, slug, excerpt, content, cover_image, tags, published, featured, reading_time, sort_order, created_at")
+    .eq("slug", slug)
+    .eq("published", true)
+    .single<Blog>();
+
+  return data ?? null;
+}
+
+export async function getTestimonials() {
+  if (!isSupabaseConfigured()) {
+    return sampleTestimonials;
+  }
+
+  const supabase = await createSupabaseServerClient();
+  if (!supabase) {
+    return [] as Testimonial[];
+  }
+
+  const { data } = await supabase
+    .from("testimonials")
+    .select("id, client_name, client_role, company, content, rating, avatar_url, featured, sort_order, created_at")
+    .order("sort_order", { ascending: true })
+    .returns<Testimonial[]>();
+
+  return data ?? [];
+}
+
+export async function getFeaturedTestimonials() {
+  const testimonials = await getTestimonials();
+  return testimonials.filter((t) => t.featured);
 }
 
 export async function getAdminProfile() {
