@@ -14,7 +14,7 @@ import { siteDescription, siteName } from "@/lib/site";
 import { getFeaturedProjects, getSiteSettings } from "@/lib/queries";
 
 export const metadata: Metadata = {
-  title: "Frontend Engineer Portfolio",
+  title: "Full Stack Developer",
   description: siteDescription,
   alternates: {
     canonical: "/",
@@ -44,7 +44,7 @@ export default async function HomePage() {
             <Reveal className="space-y-7" direction="up">
               <p className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-xs uppercase tracking-[0.24em] text-white/70">
                 <Sparkles size={14} className="text-[#8b5cf6]" />
-                Frontend Engineer
+                Full Stack Developer
               </p>
 
               <h1 className="font-display text-balance text-5xl font-bold leading-[0.94] text-white sm:text-6xl lg:text-7xl">
@@ -82,7 +82,7 @@ export default async function HomePage() {
             <SectionHeading
               label="About"
               title="Building premium interfaces with clear systems, polished motion, and maintainable architecture."
-              description="I approach frontend engineering as product design plus performance engineering, so every section feels intentional and fast."
+              description="I approach full-stack engineering as product design plus performance engineering, so every section feels intentional and fast."
             />
           </Reveal>
 

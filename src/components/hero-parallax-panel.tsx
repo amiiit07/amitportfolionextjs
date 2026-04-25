@@ -23,7 +23,7 @@ export function HeroParallaxPanel() {
   return (
     <div ref={scopeRef} className="relative">
       <motion.div style={{ y, rotate }} className="glass-shell rounded-[2rem] p-6 md:p-8">
-        <p className="text-xs uppercase tracking-[0.24em] text-white/60">Frontend Engineer</p>
+        <p className="text-xs uppercase tracking-[0.24em] text-white/60">Full Stack Developer</p>
         <h3 className="mt-3 font-display text-2xl font-bold leading-tight text-white md:text-[2rem]">
           Crafting interfaces that feel premium and perform fast.
         </h3>

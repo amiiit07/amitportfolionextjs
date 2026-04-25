@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import { Graduate, Inter, Space_Grotesk } from "next/font/google";
-import { CyberBackground } from "@/components/cyber-background";
 import { Providers } from "@/components/providers";
-import { ScrollProgress } from "@/components/scroll-progress";
-import { ThreeBackground } from "@/components/three-background";
+import { CyberBackground, ThreeBackground, ScrollProgress } from "@/components/client-only";
 import { getSiteUrl, siteDescription, siteName } from "@/lib/site";
 import "./globals.css";
 
@@ -29,19 +27,19 @@ const graduate = Graduate({
 export const metadata: Metadata = {
   metadataBase: getSiteUrl(),
   title: {
-    default: siteName,
-    template: `%s | ${siteName}`,
+    default: "Full Stack Developer",
+    template: "%s | Full Stack Developer",
   },
   description: siteDescription,
   openGraph: {
     type: "website",
-    title: siteName,
+    title: "Full Stack Developer",
     description: siteDescription,
     url: "/",
   },
   twitter: {
     card: "summary_large_image",
-    title: siteName,
+    title: "Full Stack Developer",
     description: siteDescription,
   },
   alternates: {
@@ -65,7 +63,7 @@ const schemaData = {
       "@id": new URL("/#person", getSiteUrl()).toString(),
       "name": "Amit Kumar",
       "url": getSiteUrl().toString(),
-      "jobTitle": "Frontend Engineer",
+      "jobTitle": "Full Stack Developer",
       "description": siteDescription,
       "knowsAbout": ["Next.js", "React", "TypeScript", "Tailwind CSS", "Framer Motion", "Supabase"],
       "sameAs": [
@@ -86,6 +84,7 @@ export default function RootLayout({
       lang="en"
       className={`${inter.variable} ${spaceGrotesk.variable} ${graduate.variable} h-full antialiased`}
       data-scroll-behavior="smooth"
+      suppressHydrationWarning
     >
       <head>
         <script
@@ -93,7 +92,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
         />
       </head>
-      <body className="min-h-full flex flex-col">
+      <body className="min-h-full flex flex-col" suppressHydrationWarning>
         <Providers>
           <CyberBackground />
           <ThreeBackground />

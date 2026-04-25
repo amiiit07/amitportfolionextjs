@@ -29,7 +29,7 @@ export function ConversationCard({ email, location }: ConversationCardProps) {
           <p className="text-xs uppercase tracking-[0.22em] text-white/58">Contact Footer</p>
           <h3 className="mt-3 font-display text-3xl font-semibold text-white md:text-4xl">Start a Conversation</h3>
           <p className="mt-4 max-w-xl text-sm leading-7 text-muted md:text-base">
-            Open for frontend engineering roles, product collaborations, and performance-focused interface builds.
+            Open for full-stack engineering roles, product collaborations, and performance-focused interface builds.
           </p>
 
           <div className="mt-7 flex flex-wrap items-center gap-3">
