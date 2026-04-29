@@ -41,9 +41,9 @@ export function Reveal({
       whileInView={{ opacity: 1, y: 0, x: 0 }}
       viewport={{ once, amount: 0.12, margin: "0px 0px -40px 0px" }}
       transition={{ 
-        duration: shouldReduceMotion ? 0.2 : duration, 
-        ease: [0.22, 1, 0.36, 1], 
-        delay: shouldReduceMotion ? 0 : delay 
+        duration: shouldReduceMotion ? 0.15 : duration, 
+        ease: "easeOut", 
+        delay: shouldReduceMotion ? 0 : delay * 0.8
       }}
     >
       {children}

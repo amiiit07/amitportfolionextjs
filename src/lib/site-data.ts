@@ -53,7 +53,7 @@ export const skillMetrics = [
 
 export const experienceTimeline = [
   {
-    year: "3+ Years",
+    year: "16 Months",
     title: "Building modern web products",
     description:
       "Shipping polished frontend experiences and scalable full-stack applications for brands, creators, and startups.",
@@ -98,9 +98,9 @@ export const techStackItems: Array<{
 ];
 
 export const portfolioStats = [
-  { label: "Projects Completed", value: "20+" },
+  { label: "Projects Completed", value: "5+" },
   { label: "Technologies", value: "15+" },
-  { label: "Experience", value: "3+ Years" },
+  { label: "Experience", value: "16 Months" },
 ];
 
 export const socialLinks = [

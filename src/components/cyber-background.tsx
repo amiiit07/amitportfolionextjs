@@ -2,13 +2,13 @@
 
 import { motion } from "framer-motion";
 
-const particles = Array.from({ length: 18 }, (_, index) => ({
+const particles = Array.from({ length: 8 }, (_, index) => ({
   id: index,
   left: `${6 + ((index * 11) % 88)}%`,
   top: `${8 + ((index * 13) % 84)}%`,
-  delay: index * 0.25,
-  duration: 5 + (index % 4),
-  size: 4 + (index % 3) * 2,
+  delay: index * 0.15,
+  duration: 6 + (index % 2),
+  size: 5 + (index % 2) * 2,
 }));
 
 export function CyberBackground() {
@@ -26,22 +26,21 @@ export function CyberBackground() {
             height: particle.size,
           }}
           animate={{
-            y: [0, -16, 8, 0],
-            x: [0, 10, -6, 0],
-            opacity: [0.22, 0.85, 0.32, 0.22],
-            scale: [1, 1.4, 0.9, 1],
+            y: [0, -12, 0],
+            x: [0, 8, 0],
+            opacity: [0.18, 0.7, 0.18],
           }}
           transition={{
             duration: particle.duration,
             repeat: Number.POSITIVE_INFINITY,
-            ease: "easeInOut",
+            ease: "linear",
             delay: particle.delay,
           }}
         />
       ))}
-      <div className="absolute left-[10%] top-[14%] h-56 w-56 rounded-full bg-accent/14 blur-[110px]" />
-      <div className="absolute right-[8%] top-[22%] h-64 w-64 rounded-full bg-accent-2/16 blur-[120px]" />
-      <div className="absolute bottom-[10%] left-[36%] h-72 w-72 rounded-full bg-accent-4/12 blur-[140px]" />
+      <div className="absolute left-[10%] top-[14%] h-56 w-56 rounded-full bg-accent/10 blur-[90px]" />
+      <div className="absolute right-[8%] top-[22%] h-64 w-64 rounded-full bg-accent-2/12 blur-[100px]" />
+      <div className="absolute bottom-[10%] left-[36%] h-72 w-72 rounded-full bg-accent-4/8 blur-[110px]" />
     </div>
   );
 }

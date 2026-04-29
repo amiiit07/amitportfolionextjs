@@ -16,36 +16,36 @@ export async function SiteFooter() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="mt-24 py-12">
+    <footer className="mt-16 py-10 sm:mt-24 sm:py-12">
       <div className="page-shell">
-        <div className="relative overflow-hidden rounded-[2.5rem] border border-white/10 bg-gradient-to-br from-white/[0.06] to-transparent p-8 md:p-12">
+        <div className="relative overflow-hidden rounded-[1.75rem] border border-white/10 bg-gradient-to-br from-white/[0.06] to-transparent p-5 sm:rounded-[2.5rem] sm:p-8 md:p-12">
           <div className="absolute -top-20 -right-20 h-80 w-80 rounded-full bg-accent/10 blur-3xl" />
           <div className="absolute -bottom-20 left-1/4 h-60 w-60 rounded-full bg-accent-2/10 blur-3xl" />
           <div className="absolute top-1/2 left-0 h-40 w-40 rounded-full bg-accent-3/5 blur-2xl" />
           
-          <div className="relative z-10 flex flex-col gap-10 lg:flex-row lg:items-center lg:justify-between">
-            <div className="max-w-xl space-y-6">
+          <div className="relative z-10 flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
+            <div className="max-w-xl space-y-5 sm:space-y-6">
               <div className="inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/10 px-4 py-1.5 text-xs font-medium text-accent">
                 <Sparkles size={14} />
                 Available for Projects
               </div>
-              <h2 className="text-4xl font-bold text-white md:text-5xl">
+              <h2 className="text-3xl font-bold text-white sm:text-4xl md:text-5xl">
                 Let&apos;s build something <span className="text-accent">amazing</span> together.
               </h2>
-              <p className="text-lg leading-relaxed text-white/60">
+              <p className="text-base leading-relaxed text-white/60 sm:text-lg">
                 Whether you need a stunning portfolio, a powerful web application, or a complete full-stack solution — I&apos;m here to bring your vision to life.
               </p>
-              <div className="flex flex-wrap gap-4">
+              <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
                 <Link 
                   href="/contact"
-                  className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-accent to-accent-2 px-7 py-3.5 text-sm font-semibold text-black transition-all hover:shadow-lg hover:shadow-accent/30 hover:scale-105"
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-accent to-accent-2 px-7 py-3.5 text-sm font-semibold text-black transition-all hover:shadow-lg hover:shadow-accent/30 hover:scale-105 sm:w-auto"
                 >
                   Get in Touch
                   <ArrowRight size={16} />
                 </Link>
                 <Link 
                   href="/projects"
-                  className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-7 py-3.5 text-sm font-semibold text-white transition-all hover:bg-white/10 hover:border-white/30"
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-white/20 bg-white/5 px-7 py-3.5 text-sm font-semibold text-white transition-all hover:bg-white/10 hover:border-white/30 sm:w-auto"
                 >
                   View Projects
                 </Link>

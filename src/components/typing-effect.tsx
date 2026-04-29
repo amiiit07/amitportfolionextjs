@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useReducedMotion } from "framer-motion";
 
 type TypingEffectProps = {
   texts: string[];
@@ -17,6 +18,7 @@ export function TypingEffect({
   pauseDuration = 2000,
   className = "",
 }: TypingEffectProps) {
+  const shouldReduceMotion = useReducedMotion();
   const [text, setText] = useState("");
   const [textIndex, setTextIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -51,7 +53,7 @@ export function TypingEffect({
   return (
     <span className={className}>
       {text}
-      <span className="animate-pulse text-accent">|</span>
+      <span className={shouldReduceMotion ? "text-accent" : "animate-pulse text-accent"}>|</span>
     </span>
   );
 }

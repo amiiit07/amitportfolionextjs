@@ -84,8 +84,8 @@ const whyChooseUs = [
     title: "Secure & Reliable",
     description: "Production-ready architecture with stable deployment workflow and scalable backend patterns.",
     icon: ShieldCheck,
-    accent: "text-[#93c5fd]",
-    glow: "hover:shadow-[0_0_26px_rgba(96,165,250,0.18)]",
+    accent: "text-[#a5b4fc]",
+    glow: "hover:shadow-[0_0_26px_rgba(165,180,252,0.18)]",
   },
 ];
 
@@ -111,6 +111,7 @@ export default function ServicesPage() {
         <Reveal>
           <section className="mb-14">
             <div className="mx-auto max-w-3xl text-center">
+              <p className="eyebrow mx-auto mb-4">Services</p>
               <h2 className="font-display text-4xl font-semibold text-white md:text-5xl">
                 Industries We Serve in Patna
               </h2>
@@ -125,12 +126,12 @@ export default function ServicesPage() {
 
                 return (
                   <Reveal key={industry.title} delay={index * 0.04}>
-                    <article className="group relative h-full rounded-[1.35rem] border border-white/10 bg-[#0b0f1a]/92 p-6 text-center shadow-[inset_0_1px_0_rgba(255,255,255,0.03)] transition-all duration-300 hover:-translate-y-0.5 hover:border-[#f59e0b]/35 hover:shadow-[0_0_28px_rgba(245,158,11,0.14)]">
-                      <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-full border border-[#f59e0b]/35 bg-[#f59e0b]/8 text-[#fbbf24] transition-transform duration-300 group-hover:scale-105">
+                    <article className="surface group relative h-full rounded-[1.35rem] p-6 text-center transition-all duration-300 hover:-translate-y-0.5 hover:border-[#3b82f6]/32 hover:shadow-[0_0_28px_rgba(59,130,246,0.14)]">
+                      <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-full border border-[#3b82f6]/28 bg-[#3b82f6]/10 text-[#a5b4fc] transition-transform duration-300 group-hover:scale-105">
                         <Icon size={28} />
                       </span>
                       <h3 className="mt-5 text-2xl font-semibold text-white">{industry.title}</h3>
-                      <p className="mt-3 text-sm leading-7 text-white/66">{industry.description}</p>
+                      <p className="mt-3 text-sm leading-7 text-white/72">{industry.description}</p>
                     </article>
                   </Reveal>
                 );
@@ -140,7 +141,7 @@ export default function ServicesPage() {
         </Reveal>
 
         <Reveal delay={0.06}>
-          <section className="mb-14 rounded-[2rem] border border-white/10 bg-gradient-to-br from-[#0a1326]/92 to-[#11192f]/88 p-6 md:p-10">
+          <section className="mb-14 rounded-[2rem] border border-white/10 bg-gradient-to-br from-[#0a1326]/94 via-[#0f1830]/90 to-[#11192f]/90 p-6 md:p-10">
             <div className="mx-auto max-w-3xl text-center">
               <h2 className="font-display text-4xl font-semibold text-white md:text-5xl">
                 Why Clients Choose Us
@@ -156,20 +157,20 @@ export default function ServicesPage() {
 
                 return (
                   <Reveal key={item.title} delay={index * 0.06}>
-                    <article className={`group h-full rounded-[1.5rem] border border-white/10 bg-[#0b1427]/82 p-6 transition-all duration-300 hover:-translate-y-0.5 ${item.glow}`}>
+                    <article className={`surface group h-full rounded-[1.5rem] p-6 transition-all duration-300 hover:-translate-y-0.5 ${item.glow}`}>
                       <div className={`flex h-12 w-12 items-center justify-center rounded-xl border border-white/12 bg-white/6 ${item.accent}`}>
                         <Icon size={24} />
                       </div>
                       <h3 className="mt-5 text-3xl font-semibold text-white">{item.title}</h3>
-                      <p className="mt-3 text-sm leading-7 text-white/68">{item.description}</p>
+                      <p className="mt-3 text-sm leading-7 text-white/72">{item.description}</p>
                     </article>
                   </Reveal>
                 );
               })}
             </div>
 
-            <div className="mt-8 rounded-2xl border border-white/10 bg-white/[0.03] px-5 py-4 text-center md:px-6">
-              <p className="text-sm leading-7 text-white/72 md:text-base">
+            <div className="mt-8 rounded-2xl border border-[#3b82f6]/18 bg-gradient-to-r from-[#3b82f6]/10 via-[#8b5cf6]/8 to-transparent px-5 py-4 text-center md:px-6">
+              <p className="text-sm leading-7 text-white/76 md:text-base">
                 Based in <span className="font-semibold text-white">Patna, Bihar</span>, I help local businesses,
                 startups, and service brands build modern websites that perform fast, rank better, and convert visitors
                 into qualified leads.
@@ -189,30 +190,26 @@ export default function ServicesPage() {
         <div className="mt-12 grid gap-8 lg:grid-cols-2">
           {services.map((service, index) => (
             <Reveal key={service.title} delay={index * 0.08}>
-              <div
-                className={`surface relative h-full overflow-hidden rounded-[2rem] p-8 ${
-                  service.popular ? "border-accent/40" : ""
-                }`}
-              >
+              <div className={`surface relative h-full overflow-hidden rounded-[2rem] p-8 ${service.popular ? "border-[#3b82f6]/40" : ""}`}>
                 {service.popular && (
-                  <div className="absolute right-6 top-6 rounded-full bg-accent px-3 py-1 text-xs font-semibold text-black">
+                  <div className="absolute right-6 top-6 rounded-full bg-gradient-to-r from-[#3b82f6] to-[#8b5cf6] px-3 py-1 text-xs font-semibold text-white shadow-[0_0_18px_rgba(59,130,246,0.22)]">
                     Most Popular
                   </div>
                 )}
                 <div className="mb-6 flex items-center gap-4">
-                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-accent/30 bg-accent/10">
-                    <service.icon size={28} className="text-accent" />
+                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-[#3b82f6]/28 bg-[#3b82f6]/10">
+                    <service.icon size={28} className="text-[#a5b4fc]" />
                   </div>
                   <div>
                     <h3 className="text-2xl font-semibold text-white">{service.title}</h3>
-                    <p className="text-lg font-bold text-accent">{service.price}</p>
+                    <p className="text-lg font-bold text-[#a5b4fc]">{service.price}</p>
                   </div>
                 </div>
                 <p className="text-sm leading-relaxed text-muted">{service.description}</p>
                 <ul className="mt-6 space-y-3">
                   {service.features.map((feature) => (
                     <li key={feature} className="flex items-center gap-3 text-sm text-white/80">
-                      <Check size={18} className="text-accent" />
+                      <Check size={18} className="text-[#60a5fa]" />
                       {feature}
                     </li>
                   ))}
@@ -229,7 +226,7 @@ export default function ServicesPage() {
         </div>
 
         <Reveal>
-          <div className="mt-16 rounded-[2rem] border border-accent/20 bg-gradient-to-br from-accent/10 to-transparent p-8 text-center">
+          <div className="mt-16 rounded-[2rem] border border-[#3b82f6]/20 bg-gradient-to-br from-[#3b82f6]/10 via-[#8b5cf6]/8 to-transparent p-8 text-center">
             <h3 className="text-2xl font-semibold text-white">Need a Custom Solution?</h3>
             <p className="mt-3 max-w-xl mx-auto text-muted">
               Have a unique project in mind? Let&apos;s discuss your requirements and create a

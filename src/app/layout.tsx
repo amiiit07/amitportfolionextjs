@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Graduate, Inter, Space_Grotesk } from "next/font/google";
 import { Providers } from "@/components/providers";
-import { CyberBackground, ThreeBackground, ScrollProgress } from "@/components/client-only";
+import { CyberBackground, ThreeBackground } from "@/components/client-only";
 import { getSiteUrl, siteDescription, siteName } from "@/lib/site";
 import "./globals.css";
 
@@ -96,7 +96,6 @@ export default function RootLayout({
         <Providers>
           <CyberBackground />
           <ThreeBackground />
-          <ScrollProgress />
           {children}
         </Providers>
       </body>

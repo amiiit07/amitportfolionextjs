@@ -22,20 +22,20 @@ export function ConversationCard({ email, location }: ConversationCardProps) {
   }
 
   return (
-    <article className="glass-shell relative overflow-hidden rounded-[2rem] p-6 md:p-8">
+    <article className="glass-shell relative overflow-hidden rounded-[1.5rem] p-5 sm:rounded-[2rem] sm:p-6 md:p-8">
       <div className="mesh-blob mesh-blob-purple -right-14 -top-12 h-36 w-36" />
-      <div className="relative z-10 grid gap-7 lg:grid-cols-[1.05fr_0.95fr] lg:items-end">
+      <div className="relative z-10 grid gap-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-end">
         <div>
-          <p className="text-xs uppercase tracking-[0.22em] text-white/58">Contact Footer</p>
-          <h3 className="mt-3 font-display text-3xl font-semibold text-white md:text-4xl">Start a Conversation</h3>
+          <p className="text-[11px] uppercase tracking-[0.22em] text-white/58 sm:text-xs">Contact Footer</p>
+          <h3 className="mt-3 font-display text-2xl font-semibold text-white sm:text-3xl md:text-4xl">Start a Conversation</h3>
           <p className="mt-4 max-w-xl text-sm leading-7 text-muted md:text-base">
             Open for full-stack engineering roles, product collaborations, and performance-focused interface builds.
           </p>
 
-          <div className="mt-7 flex flex-wrap items-center gap-3">
+          <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
             <a
               href={`mailto:${email}`}
-              className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-5 py-2.5 text-sm text-white hover:border-white/35"
+              className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-white/20 bg-white/10 px-5 py-2.5 text-sm text-white hover:border-white/35 sm:w-auto"
             >
               <Mail size={16} />
               {email}
@@ -43,7 +43,7 @@ export function ConversationCard({ email, location }: ConversationCardProps) {
             <button
               type="button"
               onClick={handleCopyEmail}
-              className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-transparent px-4 py-2.5 text-sm text-white/85 hover:border-white/35 hover:text-white"
+              className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-white/20 bg-transparent px-4 py-2.5 text-sm text-white/85 hover:border-white/35 hover:text-white sm:w-auto"
             >
               {copied ? <Check size={16} /> : <Copy size={16} />}
               {copied ? "Copied" : "Copy Email"}

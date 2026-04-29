@@ -5,7 +5,7 @@ import { BriefcaseBusiness, Gauge, Rocket } from "lucide-react";
 import { useRef } from "react";
 
 const stats = [
-  { label: "Production Projects", value: "20+", icon: BriefcaseBusiness },
+  { label: "Production Projects", value: "5+", icon: BriefcaseBusiness },
   { label: "Core Stack", value: "React / Next.js", icon: Rocket },
   { label: "Lighthouse Focus", value: "90+", icon: Gauge },
 ];
