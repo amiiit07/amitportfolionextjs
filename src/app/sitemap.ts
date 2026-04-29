@@ -1,10 +1,11 @@
 import type { MetadataRoute } from "next";
-import { sampleBlogs } from "@/lib/site-data";
+import { getBlogs, getProjects } from "@/lib/queries";
 import { getSiteUrl } from "@/lib/site";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const siteUrl = getSiteUrl();
   const lastModified = new Date();
+  const [blogs, projects] = await Promise.all([getBlogs(), getProjects()]);
 
   const baseRoutes: MetadataRoute.Sitemap = [
     {
@@ -51,12 +52,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
-  const blogRoutes: MetadataRoute.Sitemap = sampleBlogs.map((blog) => ({
+  const projectRoutes: MetadataRoute.Sitemap = projects.map((project) => ({
+    url: new URL(`/projects/${project.slug}`, siteUrl).toString(),
+    lastModified: project.created_at ? new Date(project.created_at) : lastModified,
+    changeFrequency: "monthly",
+    priority: project.featured ? 0.82 : 0.72,
+  }));
+
+  const blogRoutes: MetadataRoute.Sitemap = blogs.map((blog) => ({
     url: new URL(`/blog/${blog.slug}`, siteUrl).toString(),
-    lastModified,
+    lastModified: blog.created_at ? new Date(blog.created_at) : lastModified,
     changeFrequency: "monthly",
     priority: 0.75,
   }));
 
-  return [...baseRoutes, ...blogRoutes];
+  return [...baseRoutes, ...projectRoutes, ...blogRoutes];
 }

@@ -70,8 +70,8 @@ export default async function HomePage() {
               </h1>
 
               <p className="cinematic-item cinematic-delay-3 max-w-2xl text-sm leading-7 text-muted sm:text-base sm:leading-8 md:text-lg">
-                I design and build high-end frontend products using React, Tailwind CSS v4, and Framer Motion with a
-                strong focus on speed, interaction quality, and production-ready architecture.
+                I design and build full-stack web products using React, Node.js, Tailwind CSS v4, and Framer Motion with a
+                strong focus on clean UI, scalable backend architecture, and production-ready code.
               </p>
 
               <div className="cinematic-item cinematic-delay-4 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
@@ -157,11 +157,44 @@ export default async function HomePage() {
                   </div>
                 </div>
               </article>
+
+            <Reveal delay={0.08}>
+              <article className="glass-shell rounded-[1.6rem] p-5 sm:rounded-[2rem] sm:p-6 md:p-8">
+                <h3 className="font-display text-2xl font-semibold text-white sm:text-3xl">How I build scalable backends.</h3>
+                <p className="mt-4 text-sm leading-8 text-muted md:text-base">
+                  APIs are designed for reliability, featuring clean architecture, proper error handling, and comprehensive documentation for seamless integration.
+                </p>
+
+                <div className="mt-6 grid gap-3">
+                  <div className="subtle-tag flex flex-col items-start justify-between gap-2 rounded-2xl px-4 py-3 sm:flex-row sm:items-center sm:gap-3">
+                    <span className="inline-flex items-center gap-2 text-sm font-medium text-white/90">
+                      <BriefcaseBusiness size={16} />
+                      RESTful & GraphQL APIs
+                    </span>
+                    <span className="text-xs uppercase tracking-[0.2em] text-white/55">Design</span>
+                  </div>
+                  <div className="subtle-tag flex flex-col items-start justify-between gap-2 rounded-2xl px-4 py-3 sm:flex-row sm:items-center sm:gap-3">
+                    <span className="inline-flex items-center gap-2 text-sm font-medium text-white/90">
+                      <GitBranch size={16} />
+                      Database + Authentication
+                    </span>
+                    <span className="text-xs uppercase tracking-[0.2em] text-white/55">Security</span>
+                  </div>
+                  <div className="subtle-tag flex flex-col items-start justify-between gap-2 rounded-2xl px-4 py-3 sm:flex-row sm:items-center sm:gap-3">
+                    <span className="inline-flex items-center gap-2 text-sm font-medium text-white/90">
+                      <Sparkles size={16} />
+                      Deployment & Monitoring
+                    </span>
+                    <span className="text-xs uppercase tracking-[0.2em] text-white/55">Reliability</span>
+                  </div>
+                </div>
+              </article>
+            </Reveal>
             </Reveal>
 
             <Reveal delay={0.08}>
               <article className="glass-shell rounded-[1.6rem] p-5 sm:rounded-[2rem] sm:p-6 md:p-8">
-                <h3 className="font-display text-2xl font-semibold text-white sm:text-3xl">From UI polish to production delivery.</h3>
+                <h3 className="font-display text-2xl font-semibold text-white sm:text-3xl">From idea to production, end-to-end.</h3>
                 <div className="mt-5 space-y-5 text-sm leading-8 text-muted md:text-base">
                   {aboutHighlights.map((item) => (
                     <p key={item}>{item}</p>
@@ -172,6 +205,8 @@ export default async function HomePage() {
                   <span className="subtle-tag rounded-full px-4 py-2 text-xs uppercase tracking-[0.2em]">Design Systems</span>
                   <span className="subtle-tag rounded-full px-4 py-2 text-xs uppercase tracking-[0.2em]">Web Performance</span>
                   <span className="subtle-tag rounded-full px-4 py-2 text-xs uppercase tracking-[0.2em]">Motion UX</span>
+                  <span className="subtle-tag rounded-full px-4 py-2 text-xs uppercase tracking-[0.2em]">API Design</span>
+                  <span className="subtle-tag rounded-full px-4 py-2 text-xs uppercase tracking-[0.2em]">Databases</span>
                 </div>
               </article>
             </Reveal>

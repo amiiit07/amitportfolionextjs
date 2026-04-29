@@ -1,15 +1,19 @@
 "use client";
 
 import { motion } from "framer-motion";
-import type { ButtonHTMLAttributes, ReactNode } from "react";
+import type { ReactNode } from "react";
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+type ButtonProps = {
   variant?: "primary" | "secondary" | "ghost" | "danger";
   size?: "sm" | "md" | "lg";
   children: ReactNode;
   isLoading?: boolean;
   icon?: ReactNode;
-}
+  className?: string;
+  disabled?: boolean;
+  type?: "button" | "submit" | "reset";
+  onClick?: () => void;
+};
 
 const variants = {
   primary:
@@ -26,6 +30,12 @@ const sizes = {
   lg: "px-6 py-3 text-base",
 };
 
+const iconSizes = {
+  sm: "h-8 w-8",
+  md: "h-10 w-10",
+  lg: "h-12 w-12",
+};
+
 export function Button({
   variant = "primary",
   size = "md",
@@ -34,7 +44,8 @@ export function Button({
   icon,
   className = "",
   disabled,
-  ...props
+  type = "button",
+  onClick,
 }: ButtonProps) {
   return (
     <motion.button
@@ -42,7 +53,8 @@ export function Button({
       whileTap={{ scale: 0.98 }}
       className={`inline-flex items-center justify-center gap-2 rounded-xl border font-medium transition-all disabled:opacity-50 disabled:cursor-not-allowed ${variants[variant]} ${sizes[size]} ${className}`}
       disabled={disabled || isLoading}
-      {...props}
+      type={type}
+      onClick={onClick}
     >
       {isLoading ? (
         <svg
@@ -73,19 +85,16 @@ export function Button({
   );
 }
 
-interface IconButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+type IconButtonProps = {
   icon: ReactNode;
   variant?: "primary" | "secondary" | "ghost" | "danger";
   size?: "sm" | "md" | "lg";
-}
-
-const iconSizes = {
-  sm: "h-8 w-8",
-  md: "h-10 w-10",
-  lg: "h-12 w-12",
+  className?: string;
+  type?: "button" | "submit" | "reset";
+  onClick?: () => void;
 };
 
-export function IconButton({ icon, variant = "ghost", size = "md", className = "", ...props }: IconButtonProps) {
+export function IconButton({ icon, variant = "ghost", size = "md", className = "", type = "button", onClick }: IconButtonProps) {
   const iconVariants = {
     primary: "bg-indigo-500/20 text-indigo-400 hover:bg-indigo-500/30",
     secondary: "bg-slate-800 text-white/70 hover:bg-slate-700 hover:text-white",
@@ -98,7 +107,8 @@ export function IconButton({ icon, variant = "ghost", size = "md", className = "
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
       className={`inline-flex items-center justify-center rounded-xl border border-white/10 transition-colors ${iconSizes[size]} ${iconVariants[variant]} ${className}`}
-      {...props}
+      type={type}
+      onClick={onClick}
     >
       {icon}
     </motion.button>

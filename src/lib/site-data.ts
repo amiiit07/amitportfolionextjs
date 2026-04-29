@@ -218,6 +218,14 @@ export const services = [
     popular: true,
   },
   {
+    title: "Backend API Development",
+    description: "Scalable REST or GraphQL APIs with authentication, database integration, and cloud deployment.",
+    price: "₹30,000 - ₹80,000",
+    features: ["API Design", "User Authentication", "Database Integration", "Error Handling", "API Documentation", "Deployment & Monitoring"],
+    icon: ServerCog,
+    popular: false,
+  },
+  {
     title: "SaaS Dashboard",
     description: "Data-rich dashboard with analytics, charts, and user management.",
     price: "₹40,000 - ₹80,000",

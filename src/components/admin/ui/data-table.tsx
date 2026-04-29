@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import type { ReactNode } from "react";
 
@@ -126,9 +127,12 @@ export function Avatar({ src, name, size = "md" }: AvatarProps) {
 
   if (src) {
     return (
-      <img
+      <Image
         src={src}
         alt={name}
+        width={48}
+        height={48}
+        unoptimized
         className={`${sizes[size]} rounded-full object-cover ring-2 ring-white/10`}
       />
     );

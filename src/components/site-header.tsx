@@ -29,11 +29,6 @@ export function SiteHeader() {
   }, []);
 
   useEffect(() => {
-    // Ensure drawer closes after navigation on mobile.
-    setMobileOpen(false);
-  }, [pathname]);
-
-  useEffect(() => {
     if (!mobileOpen) {
       document.body.style.overflow = "";
       return;

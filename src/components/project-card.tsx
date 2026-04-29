@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { ArrowUpRight, ExternalLink } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 import type { Project } from "@/lib/types";
@@ -100,6 +101,13 @@ export function ProjectCard({ project, delay = 0 }: ProjectCardProps) {
         </div>
 
         <div className="mt-6 flex flex-col gap-2.5 border-t border-white/10 pt-5 sm:flex-row sm:flex-wrap sm:gap-3">
+          <Link
+            href={`/projects/${project.slug}`}
+            className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/8 px-4 py-2 text-sm font-semibold text-white transition-all hover:border-white/40 hover:bg-white/12 sm:w-auto"
+          >
+            Case Study
+            <ArrowUpRight size={14} className="transition-transform group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
+          </Link>
           {project.live_url ? (
             <a
               href={project.live_url}

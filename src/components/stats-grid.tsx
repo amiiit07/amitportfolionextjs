@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
+import type { Variants } from "framer-motion";
 import { portfolioStats } from "@/lib/site-data";
 
 export function StatsGrid() {
@@ -15,14 +16,14 @@ export function StatsGrid() {
     },
   };
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 },
     show: {
       opacity: 1,
       y: 0,
       transition: {
         duration: shouldReduceMotion ? 0.15 : 0.4,
-        ease: [0.22, 1, 0.36, 1],
+        ease: "easeOut",
       },
     },
   };
@@ -35,7 +36,7 @@ export function StatsGrid() {
       whileInView="show"
       viewport={{ once: true, amount: 0.3 }}
     >
-      {portfolioStats.map((stat, index) => (
+      {portfolioStats.map((stat) => (
         <motion.article
           key={stat.label}
           className="surface rounded-[1.6rem] p-5 text-center"
@@ -50,4 +51,3 @@ export function StatsGrid() {
     </motion.div>
   );
 }
-

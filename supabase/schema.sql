@@ -186,7 +186,7 @@ values (
   'Available for freelance portfolio builds and dashboard projects.',
   'hello@amit.dev',
   '+91 98765 43210',
-  'India · Remote'
+  'India - Remote'
 )
 on conflict (id) do nothing;
 

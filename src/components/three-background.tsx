@@ -83,31 +83,6 @@ function FloatingOctahedron() {
   );
 }
 
-function FloatingSphere() {
-  const meshRef = useRef<THREE.Mesh>(null);
-
-  useFrame((state) => {
-    if (meshRef.current) {
-      meshRef.current.position.y = Math.sin(state.clock.elapsedTime * 0.5) * 0.3;
-    }
-  });
-
-  return (
-    <Float speed={1.2} rotationIntensity={0.2} floatIntensity={0.4}>
-      <mesh ref={meshRef} position={[1.5, 2, -4]}>
-        <sphereGeometry args={[0.4, 16, 16]} />
-        <MeshDistortMaterial
-          color="#2ecbff"
-          speed={1}
-          distort={0.05}
-          transparent
-          opacity={0.3}
-        />
-      </mesh>
-    </Float>
-  );
-}
-
 export function ThreeBackground() {
   const [shouldRender, setShouldRender] = useState(false);
 
@@ -125,7 +100,11 @@ export function ThreeBackground() {
         (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData
       );
 
-    setShouldRender(!reducedMotion && !isMobileViewport && !lowCores && !lowMemory && !saveData);
+    const frame = window.requestAnimationFrame(() => {
+      setShouldRender(!reducedMotion && !isMobileViewport && !lowCores && !lowMemory && !saveData);
+    });
+
+    return () => window.cancelAnimationFrame(frame);
   }, []);
 
   if (!shouldRender) {

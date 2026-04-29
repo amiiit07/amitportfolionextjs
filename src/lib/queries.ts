@@ -1,4 +1,5 @@
 import { fallbackSettings, sampleBlogs, sampleProjects, sampleTestimonials } from "@/lib/site-data";
+import { createSupabasePublicClient } from "@/lib/supabase/public";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { isSupabaseConfigured } from "@/lib/supabase/env";
 import type {
@@ -17,7 +18,7 @@ export async function getSiteSettings() {
     return fallbackSettings;
   }
 
-  const supabase = await createSupabaseServerClient();
+  const supabase = createSupabasePublicClient();
   if (!supabase) {
     return fallbackSettings;
   }
@@ -38,7 +39,7 @@ export async function getProjects() {
     return sampleProjects;
   }
 
-  const supabase = await createSupabaseServerClient();
+  const supabase = createSupabasePublicClient();
   if (!supabase) {
     return sampleProjects;
   }
@@ -57,6 +58,11 @@ export async function getProjects() {
 export async function getFeaturedProjects() {
   const projects = await getProjects();
   return projects.filter((project) => project.featured).slice(0, 3);
+}
+
+export async function getProjectBySlug(slug: string) {
+  const projects = await getProjects();
+  return projects.find((project) => project.slug === slug) ?? null;
 }
 
 export async function getDashboardSnapshot() {
@@ -143,7 +149,7 @@ export async function getBlogs() {
     return sampleBlogs;
   }
 
-  const supabase = await createSupabaseServerClient();
+  const supabase = createSupabasePublicClient();
   if (!supabase) {
     return [] as Blog[];
   }
@@ -163,7 +169,7 @@ export async function getBlogBySlug(slug: string) {
     return sampleBlogs.find((blog) => blog.slug === slug) ?? null;
   }
 
-  const supabase = await createSupabaseServerClient();
+  const supabase = createSupabasePublicClient();
   if (!supabase) {
     return null as Blog | null;
   }
@@ -183,7 +189,7 @@ export async function getTestimonials() {
     return sampleTestimonials;
   }
 
-  const supabase = await createSupabaseServerClient();
+  const supabase = createSupabasePublicClient();
   if (!supabase) {
     return [] as Testimonial[];
   }

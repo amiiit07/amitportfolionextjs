@@ -170,15 +170,9 @@ function Sidebar({
 
   if (isMobile) {
     return (
-      <AnimatePresence>
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm lg:hidden"
-          onClick={onClose}
-        />
-      </AnimatePresence>
+      <div className="h-full border-r border-white/10 bg-slate-900/95 shadow-2xl">
+        {sidebarContent}
+      </div>
     );
   }
 
@@ -190,7 +184,13 @@ function Sidebar({
 }
 
 function Navbar({ onMenuClick }: { onMenuClick: () => void }) {
-  const [isDark, setIsDark] = useState(true);
+  const [isDark, setIsDark] = useState(() => {
+    if (typeof window === "undefined") {
+      return true;
+    }
+
+    return localStorage.getItem("theme") !== "light";
+  });
   const [showProfileMenu, setShowProfileMenu] = useState(false);
   const [showNotifications, setShowNotifications] = useState(false);
   const pathname = usePathname();
@@ -201,22 +201,12 @@ function Navbar({ onMenuClick }: { onMenuClick: () => void }) {
   };
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme === "light") {
-      setIsDark(false);
-      document.documentElement.classList.add("light");
-    }
-  }, []);
+    document.documentElement.classList.toggle("light", !isDark);
+    localStorage.setItem("theme", isDark ? "dark" : "light");
+  }, [isDark]);
 
   const toggleTheme = () => {
-    setIsDark(!isDark);
-    if (isDark) {
-      document.documentElement.classList.add("light");
-      localStorage.setItem("theme", "light");
-    } else {
-      document.documentElement.classList.remove("light");
-      localStorage.setItem("theme", "dark");
-    }
+    setIsDark((current) => !current);
   };
 
   return (
@@ -332,20 +322,29 @@ export function AdminShell({ profile, children, signOutAction }: AdminShellProps
         {/* Mobile Sidebar */}
         <AnimatePresence>
           {isMobileOpen && (
-            <motion.div
-              initial={{ x: "-100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "-100%" }}
-              transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed left-0 top-0 z-50 h-screen w-72 lg:hidden"
-            >
-              <Sidebar
-                profile={profile}
-                signOutAction={signOutAction}
-                isMobile
-                onClose={() => setIsMobileOpen(false)}
+            <>
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm lg:hidden"
+                onClick={() => setIsMobileOpen(false)}
               />
-            </motion.div>
+              <motion.div
+                initial={{ x: "-100%" }}
+                animate={{ x: 0 }}
+                exit={{ x: "-100%" }}
+                transition={{ type: "spring", damping: 25, stiffness: 200 }}
+                className="fixed left-0 top-0 z-50 h-screen w-72 lg:hidden"
+              >
+                <Sidebar
+                  profile={profile}
+                  signOutAction={signOutAction}
+                  isMobile
+                  onClose={() => setIsMobileOpen(false)}
+                />
+              </motion.div>
+            </>
           )}
         </AnimatePresence>
 

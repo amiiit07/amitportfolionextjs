@@ -5,7 +5,6 @@ import {
   MessageSquare,
   FolderKanban,
   Users,
-  Eye,
   TrendingUp,
   Plus,
   FileText,
