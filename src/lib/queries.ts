@@ -13,6 +13,25 @@ import type {
   Testimonial,
 } from "@/lib/types";
 
+const projectPriority = new Map([
+  ["polymers-granules-hub", 0],
+  ["bihar-tourism", 1],
+  ["avnautics-aviation", 2],
+]);
+
+function sortPortfolioProjects(projects: Project[]) {
+  return [...projects].sort((a, b) => {
+    const aPriority = projectPriority.get(a.slug) ?? Number.POSITIVE_INFINITY;
+    const bPriority = projectPriority.get(b.slug) ?? Number.POSITIVE_INFINITY;
+
+    if (aPriority !== bPriority) {
+      return aPriority - bPriority;
+    }
+
+    return a.sort_order - b.sort_order;
+  });
+}
+
 export async function getSiteSettings() {
   if (!isSupabaseConfigured()) {
     return fallbackSettings;
@@ -36,12 +55,12 @@ export async function getSiteSettings() {
 
 export async function getProjects() {
   if (!isSupabaseConfigured()) {
-    return sampleProjects;
+    return sortPortfolioProjects(sampleProjects);
   }
 
   const supabase = createSupabasePublicClient();
   if (!supabase) {
-    return sampleProjects;
+    return sortPortfolioProjects(sampleProjects);
   }
 
   const { data } = await supabase
@@ -52,7 +71,7 @@ export async function getProjects() {
     .order("sort_order", { ascending: true })
     .returns<Project[]>();
 
-  return data?.length ? data : sampleProjects;
+  return sortPortfolioProjects(data?.length ? data : sampleProjects);
 }
 
 export async function getFeaturedProjects() {

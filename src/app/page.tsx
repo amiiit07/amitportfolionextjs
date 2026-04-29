@@ -85,17 +85,6 @@ export default async function HomePage() {
                 </Link>
               </div>
 
-              <div className="cinematic-item cinematic-delay-5 grid gap-2.5 pt-1 sm:grid-cols-3 sm:gap-3">
-                <div className="subtle-tag rounded-2xl px-3.5 py-2.5 text-[11px] uppercase tracking-[0.16em] text-white/80">
-                  Fast Delivery
-                </div>
-                <div className="subtle-tag rounded-2xl px-3.5 py-2.5 text-[11px] uppercase tracking-[0.16em] text-white/80">
-                  SEO Friendly
-                </div>
-                <div className="subtle-tag rounded-2xl px-3.5 py-2.5 text-[11px] uppercase tracking-[0.16em] text-white/80">
-                  Mobile First
-                </div>
-              </div>
             </Reveal>
 
             <Reveal delay={0.08} className="cinematic-item cinematic-delay-6">

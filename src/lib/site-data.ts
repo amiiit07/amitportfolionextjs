@@ -98,9 +98,9 @@ export const techStackItems: Array<{
 ];
 
 export const portfolioStats = [
-  { label: "Projects Completed", value: "5+" },
+  { label: "Projects Completed", value: "10+" },
   { label: "Technologies", value: "15+" },
-  { label: "Experience", value: "16 Months" },
+  { label: "Experience", value: "20 Months" },
 ];
 
 export const socialLinks = [
@@ -258,7 +258,7 @@ export const sampleProjects: Project[] = [
     cover_image: null,
     featured: true,
     status: "Shipped",
-    sort_order: 1,
+    sort_order: 2,
   },
   {
     id: "project-2",
@@ -322,7 +322,7 @@ export const sampleProjects: Project[] = [
     cover_image: null,
     featured: true,
     status: "Shipped",
-    sort_order: 5,
+    sort_order: 1,
   },
   {
     id: "project-6",
@@ -338,7 +338,7 @@ export const sampleProjects: Project[] = [
     cover_image: null,
     featured: true,
     status: "Shipped",
-    sort_order: 6,
+    sort_order: 3,
   },
 ];
 
