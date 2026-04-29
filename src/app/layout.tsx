@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Graduate, Inter, Space_Grotesk } from "next/font/google";
 import { Providers } from "@/components/providers";
 import { CyberBackground, ThreeBackground } from "@/components/client-only";
@@ -97,6 +98,7 @@ export default function RootLayout({
           <CyberBackground />
           <ThreeBackground />
           {children}
+          <SpeedInsights />
         </Providers>
       </body>
     </html>
