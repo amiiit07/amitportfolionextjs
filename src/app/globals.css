@@ -115,6 +115,62 @@ body {
   animation: gradient-shift 4s ease infinite;
 }
 
+.brand-mark {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  width: max-content;
+  padding: 0 0.18em 0.14em 0;
+  font-family: "Georgia", "Times New Roman", serif;
+  font-size: 1.78rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 0.2em;
+  color: #93d7ff;
+  text-transform: uppercase;
+  text-shadow:
+    0 0 12px rgba(79, 140, 255, 0.65),
+    0 0 26px rgba(79, 140, 255, 0.28);
+}
+
+.brand-mark::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: calc(100% - 0.34em);
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(147, 215, 255, 0), #4F8CFF 18%, #93d7ff 72%, rgba(147, 215, 255, 0));
+  box-shadow: 0 0 14px rgba(79, 140, 255, 0.55);
+}
+
+.brand-mark::after {
+  content: "✧";
+  position: absolute;
+  top: -0.34em;
+  right: -0.48em;
+  font-family: var(--font-sans);
+  font-size: 0.42em;
+  font-weight: 700;
+  letter-spacing: 0;
+  color: #5ea1ff;
+  text-shadow: 0 0 10px rgba(94, 161, 255, 0.9);
+}
+
+.brand-mark-header {
+  font-size: clamp(1.35rem, 2vw, 1.72rem);
+}
+
+.brand-mark-footer {
+  font-size: 1.45rem;
+}
+
+.brand-mark-compact {
+  font-size: 1.25rem;
+  letter-spacing: 0.16em;
+}
+
 @keyframes gradient-shift {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }

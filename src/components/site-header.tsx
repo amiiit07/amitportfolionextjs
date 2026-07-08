@@ -39,10 +39,8 @@ export function SiteHeader() {
               : "bg-transparent"
           }`}
         >
-          <Link href="/" className="relative group">
-            <span className="text-lg font-bold tracking-tight text-white">
-              AMIIT<span className="text-[#4F8CFF]">.</span>
-            </span>
+          <Link href="/" className="relative group" aria-label="AMIIIT home">
+            <span className="brand-mark brand-mark-header">AMIIIT</span>
           </Link>
 
           <div className="flex items-center gap-3">

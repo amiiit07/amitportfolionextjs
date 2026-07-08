@@ -14,8 +14,8 @@ export function SiteFooter() {
       <div className="page-container py-12">
         <div className="grid md:grid-cols-3 gap-8">
           <div className="space-y-4">
-            <Link href="/" className="text-lg font-bold tracking-tight text-white">
-              AMIIT<span className="text-[#4F8CFF]">.</span>
+            <Link href="/" className="inline-flex" aria-label="AMIIIT home">
+              <span className="brand-mark brand-mark-footer">AMIIIT</span>
             </Link>
             <p className="text-sm text-[#B4B4B4] leading-relaxed max-w-xs">
               Crafting premium digital experiences with modern web technologies and meticulous attention to detail.
