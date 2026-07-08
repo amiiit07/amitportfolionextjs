@@ -1,6 +1,6 @@
 export const siteName = "Amit Kumar";
 export const siteDescription =
-  "Futuristic full-stack developer portfolio built with Next.js, Supabase, Tailwind CSS, and Framer Motion.";
+  "Full-stack developer crafting premium digital experiences with Next.js, React, TypeScript, and modern web technologies.";
 
 export function getSiteUrl() {
   const configuredUrl = process.env.NEXT_PUBLIC_SITE_URL ?? process.env.VERCEL_URL;

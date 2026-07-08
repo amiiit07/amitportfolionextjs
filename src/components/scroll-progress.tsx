@@ -1,30 +1,35 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { motion, useScroll, useSpring } from "framer-motion";
 
 export function ScrollProgress() {
-  const [progress, setProgress] = useState(0);
+  const { scrollYProgress } = useScroll();
+  const scaleY = useSpring(scrollYProgress, {
+    stiffness: 200,
+    damping: 30,
+    restDelta: 0.001,
+  });
+
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const updateProgress = () => {
-      const scrollTop = window.scrollY;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const scrollPercent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-      setProgress(scrollPercent);
-    };
-
-    window.addEventListener("scroll", updateProgress, { passive: true });
-    updateProgress();
-
-    return () => window.removeEventListener("scroll", updateProgress);
-  }, []);
+    const unsubscribe = scrollYProgress.on("change", (v) => {
+      setVisible(v > 0.02 && v < 0.98);
+    });
+    return () => unsubscribe();
+  }, [scrollYProgress]);
 
   return (
-    <div className="fixed left-0 top-0 z-50 h-1 w-full bg-transparent">
-      <div
-        className="h-full bg-gradient-to-r from-accent via-accent-2 to-accent-3 transition-all duration-100"
-        style={{ width: `${progress}%` }}
+    <motion.div
+      className="fixed right-0 top-0 bottom-0 z-[100] w-[3px] bg-white/5"
+      style={{ opacity: visible ? 1 : 0 }}
+      transition={{ duration: 0.3 }}
+    >
+      <motion.div
+        className="w-full origin-top bg-gradient-to-b from-[#4F8CFF] to-[#7B61FF]"
+        style={{ scaleY }}
       />
-    </div>
+    </motion.div>
   );
 }

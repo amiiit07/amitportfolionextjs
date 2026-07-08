@@ -99,17 +99,6 @@ export function ContactForm({ action, returnTo = "/contact" }: ContactFormProps)
 
         <div className="mt-4 sm:mt-5 grid gap-4 sm:gap-5 md:grid-cols-2">
           <motion.label variants={fieldVariants} className="space-y-2.5 text-sm font-medium text-white/80">
-            <span>Phone</span>
-            <motion.input 
-              whileFocus={{ scale: 1.01 }}
-              className="field w-full rounded-xl border border-white/10 bg-white/5 text-white placeholder:text-white/30 focus:border-accent/50 focus:bg-white/10 focus:outline-none transition-all" 
-              name="phone" 
-              type="tel" 
-              placeholder="+91 7992 XXXX XX" 
-            />
-          </motion.label>
-
-          <motion.label variants={fieldVariants} className="space-y-2.5 text-sm font-medium text-white/80">
             <span>Company</span>
             <motion.input 
               whileFocus={{ scale: 1.01 }}
