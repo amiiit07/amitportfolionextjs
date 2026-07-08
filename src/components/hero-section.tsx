@@ -2,8 +2,9 @@
 
 import { useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, useMotionValue, useSpring } from "framer-motion";
-import { ArrowUpRight, ChevronDown, Sparkles } from "lucide-react";
+import { ArrowUpRight, ChevronDown } from "lucide-react";
 
 function useMousePosition() {
   const x = useMotionValue(0.5);
@@ -215,78 +216,81 @@ export function HeroSection() {
         }}
       />
 
-      <div className="page-container relative z-10 w-full pt-20 sm:pt-28 pb-16">
+      <div className="page-container relative z-10 w-full pt-24 pb-12 sm:pt-28 sm:pb-16">
         <div className="space-y-8">
-          <div className="flex flex-col sm:flex-row items-start gap-6 lg:gap-12">
-            <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold leading-[0.88] tracking-tight text-white shrink-0">
-              <span className="text-[#4F8CFF]">
-                <SplitText text="Where" delay={2.8} />
-              </span>
-              <br />
-              <SplitText text="Design" delay={3.2} />
-              <br />
-              <SplitText text="Meets" delay={3.6} />
-              <br />
-              <span className="text-[#4F8CFF]">
-                <SplitText text="Development" delay={4.0} />
-              </span>
-            </h1>
+          <div className="grid items-center gap-8 md:grid-cols-[minmax(0,1fr)_auto] lg:gap-12">
+            <div className="min-w-0 space-y-6 sm:space-y-8">
+              <h1 className="max-w-full text-[clamp(2.45rem,13vw,4.5rem)] sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold leading-[0.92] sm:leading-[0.88] tracking-tight text-white">
+                <span className="text-[#4F8CFF]">
+                  <SplitText text="Where" delay={2.8} />
+                </span>
+                <br />
+                <SplitText text="Design" delay={3.2} />
+                <br />
+                <SplitText text="Meets" delay={3.6} />
+                <br />
+                <span className="text-[#4F8CFF]">
+                  <SplitText text="Development" delay={4.0} />
+                </span>
+              </h1>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 4 }}
+              className="max-w-lg text-sm leading-7 text-[#B4B4B4] sm:text-lg sm:leading-relaxed"
+            >
+              Crafting premium full-stack applications with modern frameworks, elegant motion, and meticulous attention to detail.
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 4.2 }}
+              className="flex flex-col items-stretch gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4"
+            >
+              <MagneticButton
+                href="/contact"
+                className="group relative inline-flex items-center justify-center gap-2 rounded-full bg-[#4F8CFF] px-6 py-3.5 text-sm font-medium text-white overflow-hidden transition-shadow hover:shadow-lg hover:shadow-[#4F8CFF]/25 sm:w-auto sm:px-7 sm:text-base"
+              >
+                <span className="relative z-10 flex items-center gap-2">
+                  Start a Project
+                  <ArrowUpRight size={16} className="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+                </span>
+              </MagneticButton>
+
+              <Link
+                href="/projects"
+                className="group inline-flex items-center justify-center gap-2 rounded-full border border-white/15 px-6 py-3.5 text-sm font-medium text-white/80 transition-all hover:text-white hover:border-white/30 sm:w-auto sm:px-7 sm:text-base"
+              >
+                View Work
+                <ArrowUpRight size={16} className="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+              </Link>
+            </motion.div>
+            </div>
 
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, delay: 3.5, ease: [0.25, 0.1, 0.25, 1] }}
-              className="shrink-0"
+              className="shrink-0 justify-self-center md:justify-self-end"
             >
-              <div className="relative w-28 h-28 sm:w-32 sm:h-32 md:w-40 md:h-40 lg:w-72 lg:h-72">
+              <div className="relative h-28 w-28 sm:h-36 sm:w-36 md:h-44 md:w-44 lg:h-72 lg:w-72">
                 <div className="absolute inset-0 rounded-full bg-gradient-to-br from-[#4F8CFF]/20 to-[#7B61FF]/20 blur-3xl animate-pulse" />
                 <div className="relative w-full h-full rounded-full border border-white/10 overflow-hidden glass flex items-center justify-center">
-                  <img
+                  <Image
                     src="/amiiit.png"
                     alt="Amit Kumar"
-                    className="w-full h-full object-cover object-top"
+                    fill
+                    sizes="(max-width: 640px) 112px, (max-width: 768px) 144px, (max-width: 1024px) 176px, 288px"
+                    priority
+                    className="object-cover object-top"
                   />
                 </div>
 
               </div>
             </motion.div>
           </div>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 4 }}
-            className="max-w-lg text-base sm:text-lg leading-relaxed text-[#B4B4B4]"
-          >
-            Crafting premium full-stack applications with modern frameworks, elegant motion, and meticulous attention to detail.
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 4.2 }}
-            className="flex flex-wrap items-center gap-4 justify-end -mt-[100px]"
-          >
-            <MagneticButton
-              href="/contact"
-              className="group relative inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-[#4F8CFF] text-white font-medium overflow-hidden transition-shadow hover:shadow-lg hover:shadow-[#4F8CFF]/25"
-            >
-              <span className="relative z-10 flex items-center gap-2">
-                Start a Project
-                <ArrowUpRight size={16} className="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
-              </span>
-            </MagneticButton>
-
-            <Link
-              href="/projects"
-              className="group inline-flex items-center gap-2 px-7 py-3.5 rounded-full border border-white/15 text-white/80 hover:text-white hover:border-white/30 transition-all font-medium"
-            >
-              View Work
-              <ArrowUpRight size={16} className="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
-            </Link>
-          </motion.div>
-
-
         </div>
 
         <motion.div
