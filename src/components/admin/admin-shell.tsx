@@ -184,13 +184,8 @@ function Sidebar({
 }
 
 function Navbar({ onMenuClick }: { onMenuClick: () => void }) {
-  const [isDark, setIsDark] = useState(() => {
-    if (typeof window === "undefined") {
-      return true;
-    }
-
-    return localStorage.getItem("theme") !== "light";
-  });
+  const [isDark, setIsDark] = useState(true);
+  const [mounted, setMounted] = useState(false);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
   const [showNotifications, setShowNotifications] = useState(false);
   const pathname = usePathname();
@@ -201,9 +196,18 @@ function Navbar({ onMenuClick }: { onMenuClick: () => void }) {
   };
 
   useEffect(() => {
+    const saved = localStorage.getItem("theme");
+    if (saved === "light") {
+      setIsDark(false);
+    }
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!mounted) return;
     document.documentElement.classList.toggle("light", !isDark);
     localStorage.setItem("theme", isDark ? "dark" : "light");
-  }, [isDark]);
+  }, [isDark, mounted]);
 
   const toggleTheme = () => {
     setIsDark((current) => !current);

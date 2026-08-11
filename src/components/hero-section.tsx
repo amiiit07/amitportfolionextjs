@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 import { ArrowUpRight, ChevronDown } from "lucide-react";
 
@@ -218,8 +217,7 @@ export function HeroSection() {
 
       <div className="page-container relative z-10 w-full pt-24 pb-12 sm:pt-28 sm:pb-16">
         <div className="space-y-8">
-          <div className="grid items-center gap-8 md:grid-cols-[minmax(0,1fr)_auto] lg:gap-12">
-            <div className="min-w-0 space-y-6 sm:space-y-8">
+          <div className="space-y-6 sm:space-y-8">
               <h1 className="max-w-full text-[clamp(2.45rem,13vw,4.5rem)] sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold leading-[0.92] sm:leading-[0.88] tracking-tight text-white">
                 <span className="text-[#4F8CFF]">
                   <SplitText text="Where" delay={2.8} />
@@ -266,29 +264,6 @@ export function HeroSection() {
                 View Work
                 <ArrowUpRight size={16} className="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
               </Link>
-            </motion.div>
-            </div>
-
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, delay: 3.5, ease: [0.25, 0.1, 0.25, 1] }}
-              className="shrink-0 justify-self-center md:justify-self-end"
-            >
-              <div className="relative h-28 w-28 sm:h-36 sm:w-36 md:h-44 md:w-44 lg:h-72 lg:w-72">
-                <div className="absolute inset-0 rounded-full bg-gradient-to-br from-[#4F8CFF]/20 to-[#7B61FF]/20 blur-3xl animate-pulse" />
-                <div className="relative w-full h-full rounded-full border border-white/10 overflow-hidden glass flex items-center justify-center">
-                  <Image
-                    src="/amiiit.png"
-                    alt="Amit Kumar"
-                    fill
-                    sizes="(max-width: 640px) 112px, (max-width: 768px) 144px, (max-width: 1024px) 176px, 288px"
-                    priority
-                    className="object-cover object-top"
-                  />
-                </div>
-
-              </div>
             </motion.div>
           </div>
         </div>

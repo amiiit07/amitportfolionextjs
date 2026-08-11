@@ -66,7 +66,7 @@ export function ContactForm({ action, returnTo = "/contact" }: ContactFormProps)
       className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-gradient-to-br from-white/[0.06] to-white/[0.02] p-1 hover:border-accent/30 transition-colors duration-300"
     >
       <div className="absolute top-0 left-1/2 -translate-x-1/2 h-40 w-40 bg-accent/15 blur-3xl" />
-      <div className="absolute bottom-0 right-1/4 h-32 w-32 bg-accent-2/10 blur-3xl" />
+      <div className="absolute bottom-0 right-1/4 h-32 w-32 blur-3xl" style={{background: 'rgba(123, 97, 255, 0.10)'}} />
       
       <motion.div className="relative rounded-[1.8rem] bg-black/50 p-5 sm:p-6 md:p-8 backdrop-blur-sm" variants={containerVariants}>
         <input type="hidden" name="returnTo" value={returnTo} />
@@ -167,7 +167,7 @@ export function ContactForm({ action, returnTo = "/contact" }: ContactFormProps)
             disabled={isSubmitting}
             whileHover={!isSubmitting ? { scale: 1.08, boxShadow: "0 20px 40px rgba(59, 130, 246, 0.3)" } : undefined}
             whileTap={!isSubmitting ? { scale: 0.98 } : undefined}
-            className="group relative inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-accent to-accent-2 px-6 sm:px-8 py-3 sm:py-3.5 text-sm sm:text-base font-semibold text-black transition-all hover:shadow-lg hover:shadow-accent/40 disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100 overflow-hidden"
+            className="group relative inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-accent to-[#7B61FF] px-6 sm:px-8 py-3 sm:py-3.5 text-sm sm:text-base font-semibold text-black transition-all hover:shadow-lg hover:shadow-accent/40 disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100 overflow-hidden"
           >
             <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity" />
             <div className="relative flex items-center gap-2">

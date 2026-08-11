@@ -55,13 +55,17 @@ export async function updateContactAction(formData: FormData) {
   const session = await requireAdmin();
   const supabase = getProtectedSupabase(session);
 
-  await supabase
+  const { error } = await supabase
     .from("contacts")
     .update({
       is_read: parsed.data.isRead === "true",
       admin_notes: parsed.data.adminNotes || null,
     })
     .eq("id", parsed.data.id);
+
+  if (error) {
+    throw new Error(`Failed to update contact: ${error.message}`);
+  }
 
   await logAdminActivity({
     action: "contact.updated",
@@ -98,7 +102,7 @@ export async function createProjectAction(formData: FormData) {
 
   const slug = parsed.data.slug || slugify(parsed.data.title);
 
-  const { data } = await supabase
+  const { data, error } = await supabase
     .from("projects")
     .insert({
       title: parsed.data.title,
@@ -114,6 +118,10 @@ export async function createProjectAction(formData: FormData) {
     })
     .select("id")
     .single<{ id: string }>();
+
+  if (error) {
+    throw new Error(`Failed to create project: ${error.message}`);
+  }
 
   await logAdminActivity({
     action: "project.created",
@@ -149,7 +157,7 @@ export async function updateProjectAction(formData: FormData) {
   const session = await requireAdmin();
   const supabase = getProtectedSupabase(session);
 
-  await supabase
+  const { error } = await supabase
     .from("projects")
     .update({
       title: parsed.data.title,
@@ -164,6 +172,10 @@ export async function updateProjectAction(formData: FormData) {
       sort_order: parsed.data.sortOrder,
     })
     .eq("id", parsed.data.id);
+
+  if (error) {
+    throw new Error(`Failed to update project: ${error.message}`);
+  }
 
   await logAdminActivity({
     action: "project.updated",
@@ -187,7 +199,11 @@ export async function deleteProjectAction(formData: FormData) {
   const session = await requireAdmin();
   const supabase = getProtectedSupabase(session);
 
-  await supabase.from("projects").delete().eq("id", id);
+  const { error } = await supabase.from("projects").delete().eq("id", id);
+
+  if (error) {
+    throw new Error(`Failed to delete project: ${error.message}`);
+  }
 
   await logAdminActivity({
     action: "project.deleted",
@@ -221,7 +237,7 @@ export async function updateSettingsAction(formData: FormData) {
   const session = await requireAdmin();
   const supabase = getProtectedSupabase(session);
 
-  await supabase.from("admin_profiles").upsert({
+  const { error: profileError } = await supabase.from("admin_profiles").upsert({
     id: session.user!.id,
     email: session.user!.email ?? parsed.data.contactEmail,
     full_name: parsed.data.fullName,
@@ -230,7 +246,11 @@ export async function updateSettingsAction(formData: FormData) {
     is_super_admin: true,
   });
 
-  await supabase.from("site_settings").upsert(
+  if (profileError) {
+    throw new Error(`Failed to update admin profile: ${profileError.message}`);
+  }
+
+  const { error: settingsError } = await supabase.from("site_settings").upsert(
     {
       id: "site-settings",
       hero_badge: parsed.data.heroBadge,
@@ -243,6 +263,10 @@ export async function updateSettingsAction(formData: FormData) {
     },
     { onConflict: "id" },
   );
+
+  if (settingsError) {
+    throw new Error(`Failed to update site settings: ${settingsError.message}`);
+  }
 
   await logAdminActivity({
     action: "settings.updated",
@@ -281,7 +305,7 @@ export async function createBlogAction(formData: FormData) {
   const contentLength = parsed.data.content.split(/\s+/).length;
   const readingTime = Math.ceil(contentLength / 200);
 
-  const { data } = await supabase
+  const { data, error } = await supabase
     .from("blogs")
     .insert({
       title: parsed.data.title,
@@ -297,6 +321,10 @@ export async function createBlogAction(formData: FormData) {
     })
     .select("id")
     .single<{ id: string }>();
+
+  if (error) {
+    throw new Error(`Failed to create blog: ${error.message}`);
+  }
 
   await logAdminActivity({
     action: "blog.created",
@@ -334,7 +362,7 @@ export async function updateBlogAction(formData: FormData) {
   const contentLength = parsed.data.content.split(/\s+/).length;
   const readingTime = Math.ceil(contentLength / 200);
 
-  await supabase
+  const { error } = await supabase
     .from("blogs")
     .update({
       title: parsed.data.title,
@@ -349,6 +377,10 @@ export async function updateBlogAction(formData: FormData) {
       sort_order: parsed.data.sortOrder,
     })
     .eq("id", parsed.data.id);
+
+  if (error) {
+    throw new Error(`Failed to update blog: ${error.message}`);
+  }
 
   await logAdminActivity({
     action: "blog.updated",
@@ -372,7 +404,11 @@ export async function deleteBlogAction(formData: FormData) {
   const session = await requireAdmin();
   const supabase = getProtectedSupabase(session);
 
-  await supabase.from("blogs").delete().eq("id", id);
+  const { error } = await supabase.from("blogs").delete().eq("id", id);
+
+  if (error) {
+    throw new Error(`Failed to delete blog: ${error.message}`);
+  }
 
   await logAdminActivity({
     action: "blog.deleted",
@@ -404,7 +440,7 @@ export async function createTestimonialAction(formData: FormData) {
   const session = await requireAdmin();
   const supabase = getProtectedSupabase(session);
 
-  const { data } = await supabase
+  const { data, error } = await supabase
     .from("testimonials")
     .insert({
       client_name: parsed.data.clientName,
@@ -418,6 +454,10 @@ export async function createTestimonialAction(formData: FormData) {
     })
     .select("id")
     .single<{ id: string }>();
+
+  if (error) {
+    throw new Error(`Failed to create testimonial: ${error.message}`);
+  }
 
   await logAdminActivity({
     action: "testimonial.created",
@@ -451,7 +491,7 @@ export async function updateTestimonialAction(formData: FormData) {
   const session = await requireAdmin();
   const supabase = getProtectedSupabase(session);
 
-  await supabase
+  const { error } = await supabase
     .from("testimonials")
     .update({
       client_name: parsed.data.clientName,
@@ -464,6 +504,10 @@ export async function updateTestimonialAction(formData: FormData) {
       sort_order: parsed.data.sortOrder,
     })
     .eq("id", parsed.data.id);
+
+  if (error) {
+    throw new Error(`Failed to update testimonial: ${error.message}`);
+  }
 
   await logAdminActivity({
     action: "testimonial.updated",
@@ -487,7 +531,11 @@ export async function deleteTestimonialAction(formData: FormData) {
   const session = await requireAdmin();
   const supabase = getProtectedSupabase(session);
 
-  await supabase.from("testimonials").delete().eq("id", id);
+  const { error } = await supabase.from("testimonials").delete().eq("id", id);
+
+  if (error) {
+    throw new Error(`Failed to delete testimonial: ${error.message}`);
+  }
 
   await logAdminActivity({
     action: "testimonial.deleted",

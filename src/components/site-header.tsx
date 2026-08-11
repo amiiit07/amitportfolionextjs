@@ -78,6 +78,7 @@ export function SiteHeader() {
                     key={link.href}
                     href={link.href}
                     onClick={() => setMobileOpen(false)}
+                    aria-current={pathname === link.href ? "page" : undefined}
                     className={`block px-4 py-3.5 rounded-xl text-sm font-medium transition-colors ${
                       pathname === link.href
                         ? "bg-white/10 text-white"

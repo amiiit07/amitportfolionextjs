@@ -12,6 +12,10 @@
   --color-accent: #4F8CFF;
   --color-accent-glow: rgba(79, 140, 255, 0.35);
   --color-accent-dim: rgba(79, 140, 255, 0.15);
+  --color-accent-2: #7B61FF;
+  --color-accent-2-glow: rgba(123, 97, 255, 0.35);
+  --color-accent-3: #FF6B9D;
+  --color-accent-3-glow: rgba(255, 107, 157, 0.35);
   --font-sans: "Inter", "Geist", "Satoshi", system-ui, -apple-system, sans-serif;
   --font-display: "Geist", "Inter", "Satoshi", system-ui, sans-serif;
 }
@@ -71,6 +75,19 @@ body {
 
 @media (max-width: 768px) {
   .page-container {
+    width: min(100% - 1.5rem, 100%);
+  }
+}
+
+.page-shell {
+  position: relative;
+  z-index: 1;
+  width: min(1280px, calc(100% - 3rem));
+  margin-inline: auto;
+}
+
+@media (max-width: 768px) {
+  .page-shell {
     width: min(100% - 1.5rem, 100%);
   }
 }

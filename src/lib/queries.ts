@@ -139,8 +139,25 @@ export async function getContacts() {
 }
 
 export async function getUnreadMessages() {
-  const contacts = await getContacts();
-  return contacts.filter((contact) => !contact.is_read);
+  if (!isSupabaseConfigured()) {
+    return [] as Contact[];
+  }
+
+  const supabase = await createSupabaseServerClient();
+  if (!supabase) {
+    return [] as Contact[];
+  }
+
+  const { data } = await supabase
+    .from("contacts")
+    .select(
+      "id, name, email, phone, company, budget, project_type, message, is_read, admin_notes, created_at",
+    )
+    .eq("is_read", false)
+    .order("created_at", { ascending: false })
+    .returns<Contact[]>();
+
+  return data ?? [];
 }
 
 export async function getActivityLogs() {

@@ -26,7 +26,7 @@ export function SiteFooterContent({ contactEmail, location, currentYear }: SiteF
         {/* Animated background gradient */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           <div className="absolute -top-32 -right-32 h-96 w-96 bg-accent/8 rounded-full blur-3xl animate-pulse" style={{animationDuration: '5s'}} />
-          <div className="absolute -bottom-32 -left-32 h-80 w-80 bg-accent-2/8 rounded-full blur-3xl animate-pulse" style={{animationDuration: '7s', animationDelay: '1s'}} />
+          <div className="absolute -bottom-32 -left-32 h-80 w-80 rounded-full blur-3xl animate-pulse" style={{background: 'rgba(123, 97, 255, 0.08)', animationDuration: '7s', animationDelay: '1s'}} />
         </div>
 
         <motion.div 
@@ -37,8 +37,8 @@ export function SiteFooterContent({ contactEmail, location, currentYear }: SiteF
           className="relative z-10 overflow-hidden rounded-[1.75rem] border border-white/10 bg-gradient-to-br from-white/[0.08] via-white/[0.03] to-transparent p-5 sm:rounded-[2.5rem] sm:p-8 md:p-12 backdrop-blur-sm"
         >
           <div className="absolute -top-20 -right-20 h-80 w-80 rounded-full bg-accent/12 blur-3xl" />
-          <div className="absolute -bottom-20 left-1/4 h-60 w-60 rounded-full bg-accent-2/12 blur-3xl" />
-          <div className="absolute top-1/2 left-0 h-40 w-40 rounded-full bg-accent-3/8 blur-2xl" />
+          <div className="absolute -bottom-20 left-1/4 h-60 w-60 rounded-full blur-3xl" style={{background: 'rgba(123, 97, 255, 0.12)'}} />
+          <div className="absolute top-1/2 left-0 h-40 w-40 rounded-full blur-2xl" style={{background: 'rgba(255, 107, 157, 0.08)'}} />
           
           <div className="relative z-10 flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
             {/* Left section - CTA */}
@@ -60,7 +60,7 @@ export function SiteFooterContent({ contactEmail, location, currentYear }: SiteF
               </motion.div>
               
               <h2 className="text-3xl font-bold text-white sm:text-4xl md:text-5xl leading-tight">
-                Let&apos;s build something <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent via-accent-2 to-accent animate-pulse" style={{animationDuration: '3s'}}>amazing</span> together.
+                Let&apos;s build something <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent via-[#7B61FF] to-accent animate-pulse" style={{animationDuration: '3s'}}>amazing</span>{" "}together.
               </h2>
               
               <p className="text-base leading-relaxed text-white/70 sm:text-lg">
@@ -74,7 +74,7 @@ export function SiteFooterContent({ contactEmail, location, currentYear }: SiteF
                 >
                   <Link 
                     href="/contact"
-                    className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-accent to-accent-2 px-7 py-3.5 text-sm font-semibold text-black transition-all hover:shadow-lg hover:shadow-accent/40 sm:w-auto overflow-hidden group relative"
+                    className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-accent to-[#7B61FF] px-7 py-3.5 text-sm font-semibold text-black transition-all hover:shadow-lg hover:shadow-accent/40 sm:w-auto overflow-hidden group relative"
                   >
                     <div className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity" />
                     <div className="relative flex items-center gap-2">
@@ -134,7 +134,7 @@ export function SiteFooterContent({ contactEmail, location, currentYear }: SiteF
                     whileHover={{ x: 4 }}
                     className="flex items-center gap-3 text-sm text-white/70 group/link"
                   >
-                    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-accent-2/20 to-accent-2/10 text-accent-2">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-[#7B61FF]/20 to-[#7B61FF]/10 text-[#7B61FF]">
                       <MapPin size={16} />
                     </div>
                     <span className="truncate">{location}</span>
@@ -163,7 +163,7 @@ export function SiteFooterContent({ contactEmail, location, currentYear }: SiteF
                       >
                         <span className="relative">
                           {link.label}
-                          <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-accent to-accent-2 group-hover/nav:w-full transition-all duration-300" />
+                          <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-accent to-[#7B61FF] group-hover/nav:w-full transition-all duration-300" />
                         </span>
                       </Link>
                     </motion.div>
@@ -196,7 +196,7 @@ export function SiteFooterContent({ contactEmail, location, currentYear }: SiteF
                     href="https://www.linkedin.com/in/amiiit07/"
                     target="_blank"
                     rel="noreferrer"
-                    className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-gradient-to-br from-white/10 to-white/5 text-white/70 transition-all hover:bg-white/20 hover:border-accent-2/50 hover:text-accent-2 hover:shadow-lg hover:shadow-accent-2/20"
+                    className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-gradient-to-br from-white/10 to-white/5 text-white/70 transition-all hover:bg-white/20 hover:border-[#7B61FF]/50 hover:text-[#7B61FF] hover:shadow-lg hover:shadow-[#7B61FF]/20"
                   >
                     <svg className="h-[18px] w-[18px]" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                       <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>

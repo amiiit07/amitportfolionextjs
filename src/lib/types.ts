@@ -33,7 +33,7 @@ export type Project = {
   summary: string;
   description: string;
   stack: string[];
-  icon: string;
+  icon?: string | null;
   live_url: string | null;
   repo_url: string | null;
   cover_image: string | null;
